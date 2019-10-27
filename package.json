@@ -76,11 +76,11 @@
         }
     },
     "lint-staged": {
-        "*.js": [
+        "*.{js,ts,tsx}": [
             "eslint --fix",
             "git add"
         ],
-        "*.css": [
+        "*.{css,scss}": [
             "stylelint --fix",
             "git add"
         ],
