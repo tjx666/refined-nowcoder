@@ -1,13 +1,6 @@
 {
-    "extends": [
-        "stylelint-config-standard",
-        "stylelint-config-rational-order",
-        "stylelint-prettier/recommended"
-    ],
-    "plugins": [
-        "stylelint-order",
-        "stylelint-declaration-block-no-ignored-properties"
-    ],
+    "extends": ["stylelint-config-standard", "stylelint-config-rational-order", "stylelint-prettier/recommended"],
+    "plugins": ["stylelint-order", "stylelint-declaration-block-no-ignored-properties"],
     "rules": {
         "comment-empty-line-before": null,
         "function-name-case": "lower",
@@ -15,5 +8,5 @@
         "no-descending-specificity": null,
         "declaration-empty-line-before": null
     },
-    "ignoreFiles": ["src/vendor/styles/*"]
+    "ignoreFiles": ["src/styles/vendor/*"]
 }

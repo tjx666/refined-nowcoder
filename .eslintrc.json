@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "webextensions": true
     },
     "extends": ["airbnb", "plugin:prettier/recommended"],
     "globals": {
@@ -17,5 +18,16 @@
         "sourceType": "module"
     },
     "plugins": ["react", "@typescript-eslint"],
-    "rules": {}
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".ts", ".tsx"]
+            }
+        }
+    },
+    "rules": {
+        "import/prefer-default-export": "off",
+        "react/jsx-filename-extension": "off",
+        "react/jsx-indent": "off"
+    }
 }

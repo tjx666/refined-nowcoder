@@ -9,7 +9,8 @@
     "scripts": {
         "start": "webpack --config ./configs/webpack.dev.js --watch --progress",
         "build": "webpack --config ./configs/webpack.prod.js --watch --progress  -p",
-        "serve": "webpack-dev-server --config ./configs/webpack.dev.js --open"
+        "serve": "webpack-dev-server --config ./configs/webpack.dev.js --open",
+        "lint": "lint-staged"
     },
     "dependencies": {
         "@types/jest": "^24.0.20",
@@ -77,11 +78,11 @@
     },
     "lint-staged": {
         "*.{js,ts,tsx}": [
-            "eslint --fix",
+            "eslint -c .eslintrc.json",
             "git add"
         ],
         "*.{css,scss}": [
-            "stylelint --fix",
+            "stylelint --config .stylelintrc.json",
             "git add"
         ],
         "*.{js,jsx,ts,tsx,json,css,scss,md}": [
