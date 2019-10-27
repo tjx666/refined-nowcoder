@@ -11,8 +11,22 @@
         "build": "webpack --config ./configs/webpack.prod.js --watch --progress  -p",
         "serve": "webpack-dev-server --config ./configs/webpack.dev.js --open"
     },
+    "dependencies": {
+        "@types/jest": "^24.0.20",
+        "axios": "^0.19.0",
+        "classnames": "^2.2.6",
+        "date-fns": "^2.6.0",
+        "jest": "^24.9.0",
+        "lodash": "^4.17.15",
+        "react": "^16.11.0",
+        "react-dom": "^16.11.0",
+        "react-router-dom": "^5.1.2",
+        "react-use": "^12.9.0"
+    },
     "devDependencies": {
         "@types/chrome": "^0.0.91",
+        "@types/classnames": "^2.2.9",
+        "@types/lodash": "^4.14.144",
         "@types/react": "^16.9.11",
         "@types/react-dom": "^16.9.3",
         "@types/react-router-dom": "^5.1.0",
@@ -55,11 +69,6 @@
         "webpack-merge": "^4.2.2",
         "write-file-webpack-plugin": "^4.5.1",
         "xml-loader": "^1.2.1"
-    },
-    "dependencies": {
-        "react": "^16.11.0",
-        "react-dom": "^16.11.0",
-        "react-router-dom": "^5.1.2"
     },
     "husky": {
         "hooks": {
