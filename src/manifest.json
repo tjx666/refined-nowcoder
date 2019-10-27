@@ -5,23 +5,23 @@
     "manifest_version": 2,
     "permissions": ["storage", "declarativeContent", "activeTab"],
     "background": {
-      "scripts": ["background.js"],
-      "persistent": false
+        "scripts": ["background.js"],
+        "persistent": false
     },
     "page_action": {
-      "default_popup": "popup.html",
-      "default_icon": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "images/icons/get_started16.png",
+            "32": "images/icons/get_started32.png",
+            "48": "images/icons/get_started48.png",
+            "128": "images/icons/get_started128.png"
+        }
+    },
+    "options_page": "options.html",
+    "icons": {
         "16": "images/icons/get_started16.png",
         "32": "images/icons/get_started32.png",
         "48": "images/icons/get_started48.png",
         "128": "images/icons/get_started128.png"
-      }
-    },
-    "options_page": "options.html",
-    "icons": {
-      "16": "images/icons/get_started16.png",
-      "32": "images/icons/get_started32.png",
-      "48": "images/icons/get_started48.png",
-      "128": "images/icons/get_started128.png"
     }
-  }
+}
