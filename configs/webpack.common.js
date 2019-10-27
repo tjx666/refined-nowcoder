@@ -7,10 +7,13 @@ const webpack = require('webpack');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
+const srcDir = Path.resolve(__dirname, '../src');
+
 module.exports = {
     entry: {
-        popup: Path.resolve(__dirname, '../src/popup/index.tsx'),
-        options: Path.resolve(__dirname, '../src/options/index.tsx'),
+        background: Path.resolve(srcDir, 'pages/background/index.ts'),
+        popup: Path.resolve(srcDir, 'pages/popup/index.tsx'),
+        options: Path.resolve(srcDir, 'pages/options/index.tsx'),
     },
     output: {
         publicPath: '/',
@@ -19,6 +22,7 @@ module.exports = {
         hotUpdateChunkFilename: 'hot/hot-update.js',
         hotUpdateMainFilename: 'hot/hot-update.json',
     },
+    devtool: 'eval-source-map',
     devServer: {
         contentBase: './dist',
         hot: true,
@@ -128,7 +132,10 @@ module.exports = {
             inject: 'body',
             minify: false,
         }),
-        new CopyPlugin([{ from: Path.resolve(__dirname, '../public'), ignore: ['*.html'] }]),
+        new CopyPlugin([
+            { from: Path.resolve(__dirname, '../public'), ignore: ['*.html'] },
+            { from: Path.resolve(__dirname, '../src/manifest.json') },
+        ]),
         new webpack.HotModuleReplacementPlugin(),
     ],
     resolve: {
