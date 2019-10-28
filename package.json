@@ -7,13 +7,13 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "start": "webpack --config ./configs/webpack.dev.js --watch --progress",
-        "build": "webpack --config ./configs/webpack.prod.js --watch --progress  -p",
-        "serve": "webpack-dev-server --config ./configs/webpack.dev.js --open",
+        "start": "webpack --config ./configs/webpack.dev.ts --watch --progress",
+        "build": "webpack --config ./configs/webpack.prod.ts --watch --progress  -p",
+        "serve": "webpack-dev-server --config ./configs/webpack.dev.ts --open",
         "lint": "lint-staged"
     },
     "dependencies": {
-        "@types/jest": "^24.0.20",
+        "@types/copy-webpack-plugin": "^5.0.0",
         "axios": "^0.19.0",
         "classnames": "^2.2.6",
         "date-fns": "^2.6.0",
@@ -25,12 +25,19 @@
         "react-use": "^12.9.0"
     },
     "devDependencies": {
+        "@types/autoprefixer": "^9.6.1",
         "@types/chrome": "^0.0.91",
         "@types/classnames": "^2.2.9",
+        "@types/html-webpack-plugin": "^3.2.1",
+        "@types/jest": "^24.0.20",
         "@types/lodash": "^4.14.144",
+        "@types/node": "^12.11.7",
         "@types/react": "^16.9.11",
         "@types/react-dom": "^16.9.3",
         "@types/react-router-dom": "^5.1.0",
+        "@types/webpack": "^4.39.5",
+        "@types/webpack-dev-server": "^3.4.0",
+        "@types/webpack-merge": "^4.1.5",
         "@typescript-eslint/eslint-plugin": "^2.5.0",
         "@typescript-eslint/parser": "^2.5.0",
         "autoprefixer": "^9.7.0",
@@ -62,13 +69,13 @@
         "stylelint-order": "^3.1.1",
         "stylelint-prettier": "^1.1.1",
         "ts-loader": "^6.2.1",
+        "ts-node": "^8.4.1",
         "typescript": "^3.6.4",
         "url-loader": "^2.2.0",
         "webpack": "^4.41.2",
         "webpack-cli": "^3.3.9",
         "webpack-dev-server": "^3.9.0",
         "webpack-merge": "^4.2.2",
-        "write-file-webpack-plugin": "^4.5.1",
         "xml-loader": "^1.2.1"
     },
     "husky": {
@@ -78,11 +85,11 @@
     },
     "lint-staged": {
         "*.{js,ts,tsx}": [
-            "eslint -c .eslintrc.json",
+            "eslint -c .eslintrc",
             "git add"
         ],
         "*.{css,scss}": [
-            "stylelint --config .stylelintrc.json",
+            "stylelint --config .stylelintrc",
             "git add"
         ],
         "*.{js,jsx,ts,tsx,json,css,scss,md}": [

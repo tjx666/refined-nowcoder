@@ -5,6 +5,7 @@
     "manifest_version": 2,
     "permissions": ["storage", "declarativeContent", "activeTab"],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "minimum_chrome_version": "68",
     "background": {
         "scripts": ["js/background.bundle.js"],
         "persistent": false
@@ -18,11 +19,15 @@
             "128": "icons/get_started128.png"
         }
     },
-    "options_page": "options.html",
+    "options_ui": {
+        "chrome_style": true,
+        "page": "options.html"
+    },
     "icons": {
         "16": "icons/get_started16.png",
         "32": "icons/get_started32.png",
         "48": "icons/get_started48.png",
         "128": "icons/get_started128.png"
-    }
+    },
+    "web_accessible_resources": ["js/*", "images/*", "styles/*"]
 }

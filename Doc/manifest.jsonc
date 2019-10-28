@@ -1,3 +1,4 @@
+// 完整说明参考：https://developer.chrome.com/extensions/manifest
 {
     // 清单文件的版本，这个必须写，而且必须是2
     "manifest_version": 2,

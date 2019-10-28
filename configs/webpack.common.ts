@@ -1,15 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const Path = require('path');
-const autoprefixer = require('autoprefixer');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const webpack = require('webpack');
-const WriteFilePlugin = require('write-file-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+/* eslint-disable no-unused-vars */
+import Path from 'path';
+import webpack from 'webpack';
+import autoprefixer from 'autoprefixer';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 
 const srcDir = Path.resolve(__dirname, '../src');
 
-module.exports = {
+const config: webpack.Configuration = {
     entry: {
         background: Path.resolve(srcDir, 'pages/background/index.ts'),
         popup: Path.resolve(srcDir, 'pages/popup/index.tsx'),
@@ -26,6 +26,9 @@ module.exports = {
     devServer: {
         contentBase: './dist',
         hot: true,
+        writeToDisk: filePath => {
+            return /^(?!.+(?:hot-update.(js|json))).+$/.test(filePath);
+        },
     },
     module: {
         rules: [
@@ -114,7 +117,6 @@ module.exports = {
         ],
     },
     plugins: [
-        new WriteFilePlugin({ test: /^(?!.+(?:hot-update.(js|json))).+$/ }),
         new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
         new HtmlWebpackPlugin({
             filename: 'popup.html',
@@ -142,3 +144,5 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
     },
 };
+
+export default config;
