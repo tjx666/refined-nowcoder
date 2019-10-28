@@ -8,5 +8,5 @@
         "no-descending-specificity": null,
         "declaration-empty-line-before": null
     },
-    "ignoreFiles": ["src/styles/vendor/*"]
+    "ignoreFiles": ["src/styles/vendor/*", "dist/**/*"]
 }

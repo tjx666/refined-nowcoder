@@ -6,19 +6,22 @@ import autoprefixer from 'autoprefixer';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const srcDir = Path.resolve(__dirname, '../src');
 
 const config: webpack.Configuration = {
     entry: {
-        background: Path.resolve(srcDir, 'pages/background/index.ts'),
+        background: Path.resolve(srcDir, 'background.ts'),
+        all: Path.resolve(srcDir, 'contents/all/index.ts'),
+        discuss: Path.resolve(srcDir, 'contents/discuss/index.ts'),
         popup: Path.resolve(srcDir, 'pages/popup/index.tsx'),
         options: Path.resolve(srcDir, 'pages/options/index.tsx'),
     },
     output: {
         publicPath: '/',
         path: Path.resolve(__dirname, '../dist'),
-        filename: 'js/[name].bundle.js',
+        filename: 'js/[name].js',
         hotUpdateChunkFilename: 'hot/hot-update.js',
         hotUpdateMainFilename: 'hot/hot-update.json',
     },
@@ -40,7 +43,7 @@ const config: webpack.Configuration = {
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader',
+                    MiniCssExtractPlugin.loader,
                     { loader: 'css-loader', options: { importLoaders: 1 } },
                     {
                         loader: 'postcss-loader',
@@ -54,7 +57,7 @@ const config: webpack.Configuration = {
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    'style-loader',
+                    MiniCssExtractPlugin.loader,
                     'css-loader',
                     {
                         loader: 'postcss-loader',
@@ -139,6 +142,9 @@ const config: webpack.Configuration = {
             { from: Path.resolve(__dirname, '../src/manifest.json') },
         ]),
         new webpack.HotModuleReplacementPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].css',
+        }),
     ],
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
