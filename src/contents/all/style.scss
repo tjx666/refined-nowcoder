@@ -1,5 +1,4 @@
-/* useless elements */
-/* 面试菜单项右上角的红色的 n */
-body > div.nk-container > div.nowcoder-header.js-nowcoder-header > div > ul:nth-child(2) > li:nth-child(3) > span {
+// 面试菜单项红标
+.nowcoder-navbar > li[data-type='ai-interview'] > span {
     display: none;
 }

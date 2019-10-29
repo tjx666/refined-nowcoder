@@ -17,7 +17,7 @@
             "js": ["js/all.js"]
         },
         {
-            "matches": ["https://www.nowcoder.com/discuss/*"],
+            "matches": ["https://www.nowcoder.com/discuss*"],
             "css": ["css/discuss.css"],
             "js": ["js/discuss.js"]
         }

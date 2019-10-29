@@ -22,8 +22,8 @@ const config: webpack.Configuration = {
         publicPath: '/',
         path: Path.resolve(__dirname, '../dist'),
         filename: 'js/[name].js',
-        hotUpdateChunkFilename: 'hot/hot-update.js',
-        hotUpdateMainFilename: 'hot/hot-update.json',
+        hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
+        hotUpdateMainFilename: 'hot/[hash].hot-update.json',
     },
     devtool: 'eval-source-map',
     devServer: {
