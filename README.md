@@ -16,6 +16,8 @@ chrome extension for [nowcoder](https://www.nowcoder.com)。
 -   屏蔽讨论圈顶部横幅
 -   屏蔽面试菜单项红标
 -   屏蔽右下角热门推荐
+-   屏蔽许愿贴
+-   屏蔽交友贴
 
 ## 参考资料
 

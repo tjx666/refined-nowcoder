@@ -33,22 +33,23 @@ import $ from 'jquery';
         const links = $(this).find('.discuss-main a');
         if (links.length >= 1) {
             const title = links[0].textContent!;
-            const allBlacklistKeywords = Object.values(shadowConfigs).reduce(
-                (all: string[], config) => [...all, ...config.blacklistKeywords],
-                []
-            );
-            const allWhitelistKeywords = Object.values(shadowConfigs).reduce(
-                (all: string[], config) => (config.whitelistKeywords ? [...all, ...config.whitelistKeywords] : all),
-                []
-            );
-            const allPassPatterns = Object.values(shadowConfigs).reduce(
-                (all: RegExp[], config) => (config.passPatterns ? [...all, ...config.passPatterns] : all),
-                []
-            );
-            const allBlockPatterns = Object.values(shadowConfigs).reduce(
-                (all: RegExp[], config) => (config.blockPatterns ? [...all, ...config.blockPatterns] : all),
-                []
-            );
+
+            const configItemKeys: (keyof ShadowConfigItem)[] = [
+                'blacklistKeywords',
+                'whitelistKeywords',
+                'passPatterns',
+                'blockPatterns',
+            ];
+
+            const [allBlacklistKeywords, allWhitelistKeywords, allPassPatterns, allBlockPatterns] = configItemKeys.map(
+                key =>
+                    Object.values(shadowConfigs).reduce((all: (string | RegExp)[], config) => {
+                        if (key === 'blacklistKeywords') {
+                            return [...all, ...config.blacklistKeywords];
+                        }
+                        return config[key] ? [...all, ...config[key]!] : all;
+                    }, [])
+            ) as [string[], string[], RegExp[], RegExp[]];
 
             const inWhitelist =
                 allWhitelistKeywords.some(keyword => title.includes(keyword)) ||
@@ -59,10 +60,7 @@ import $ from 'jquery';
                 (allBlacklistKeywords.some(keyword => title.includes(keyword)) ||
                     allBlockPatterns.some(pattern => pattern.test(title)));
 
-            if (shouldShadow) {
-                console.log(title);
-                $(this).remove();
-            }
+            shouldShadow && $(this).remove();
         }
     });
 })();
