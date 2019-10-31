@@ -2,10 +2,10 @@
 
 chrome extension for [nowcoder](https://www.nowcoder.com)。
 
-# :dart: TODO
+## :dart: TODO
 
--   [ ] 屏蔽广告
--   [ ] 屏蔽许愿
+-   [x] 屏蔽广告
+-   [x] 屏蔽许愿
 -   [ ] 自定义屏蔽，指定需要屏蔽的帖子的标题中的关键字
 -   [ ] 自动打卡
 
