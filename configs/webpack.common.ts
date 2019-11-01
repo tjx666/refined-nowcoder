@@ -27,6 +27,7 @@ const config: webpack.Configuration = {
     },
     devtool: 'eval-source-map',
     devServer: {
+        port: 3000,
         contentBase: './dist',
         hot: true,
         writeToDisk: filePath => {
@@ -147,6 +148,10 @@ const config: webpack.Configuration = {
         }),
     ],
     resolve: {
+        alias: {
+            '@': srcDir,
+            utils: Path.resolve(srcDir, './utils'),
+        },
         extensions: ['.tsx', '.ts', '.js'],
     },
 };

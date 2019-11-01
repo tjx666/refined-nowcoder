@@ -1,1 +1,19 @@
 @import '../../styles/reset/index.scss';
+
+.app {
+    padding-top: 20px;
+
+    .form-control {
+        width: 100%;
+
+        label {
+            display: inline-block;
+            width: 100px;
+            text-align: right;
+        }
+
+        input {
+            vertical-align: bottom;
+        }
+    }
+}

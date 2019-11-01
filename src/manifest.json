@@ -3,12 +3,21 @@
     "version": "1.0",
     "description": "牛客网 chrome 扩展",
     "manifest_version": 2,
-    "permissions": ["storage", "declarativeContent", "activeTab"],
+    "permissions": [
+        "storage",
+        "declarativeContent",
+        "activeTab",
+        "webRequest",
+        "webRequestBlocking",
+        "storage",
+        "http://*/*",
+        "https://*/*"
+    ],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "minimum_chrome_version": "68",
     "background": {
         "scripts": ["js/background.js"],
-        "persistent": false
+        "persistent": true
     },
     "content_scripts": [
         {
@@ -22,7 +31,7 @@
             "js": ["js/discuss.js"]
         }
     ],
-    "page_action": {
+    "browser_action": {
         "default_popup": "popup.html",
         "default_icon": {
             "16": "icons/get_started16.png",

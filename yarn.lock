@@ -2941,6 +2941,17 @@ eslint-import-resolver-node@^0.3.2:
     debug "^2.6.9"
     resolve "^1.5.0"
 
+eslint-import-resolver-typescript@^2.0.0:
+  version "2.0.0"
+  resolved "http://r.cnpmjs.org/eslint-import-resolver-typescript/download/eslint-import-resolver-typescript-2.0.0.tgz#e95f126cc12d3018b9cc11692b4dbfd3e17d3ea6"
+  integrity sha1-6V8SbMEtMBi5zBFpK02/0+F9PqY=
+  dependencies:
+    debug "^4.1.1"
+    is-glob "^4.0.1"
+    resolve "^1.12.0"
+    tiny-glob "^0.2.6"
+    tsconfig-paths "^3.9.0"
+
 eslint-module-utils@^2.4.0:
   version "2.4.1"
   resolved "http://r.cnpmjs.org/eslint-module-utils/download/eslint-module-utils-2.4.1.tgz#7b4675875bf96b0dbf1b21977456e5bb1f5e018c"
@@ -3801,6 +3812,11 @@ globals@^11.1.0, globals@^11.7.0:
   resolved "http://r.cnpmjs.org/globals/download/globals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
   integrity sha1-q4eVM4hooLq9hSV1gBjCp+uVxC4=
 
+globalyzer@^0.1.0:
+  version "0.1.4"
+  resolved "http://r.cnpmjs.org/globalyzer/download/globalyzer-0.1.4.tgz#bc8e273afe1ac7c24eea8def5b802340c5cc534f"
+  integrity sha1-vI4nOv4ax8JO6o3vW4AjQMXMU08=
+
 globby@^10.0.1:
   version "10.0.1"
   resolved "http://r.cnpmjs.org/globby/download/globby-10.0.1.tgz#4782c34cb75dd683351335c5829cc3420e606b22"
@@ -3856,6 +3872,11 @@ globjoin@^0.1.4:
   version "0.1.4"
   resolved "http://r.cnpmjs.org/globjoin/download/globjoin-0.1.4.tgz#2f4494ac8919e3767c5cbb691e9f463324285d43"
   integrity sha1-L0SUrIkZ43Z8XLtpHp9GMyQoXUM=
+
+globrex@^0.1.1:
+  version "0.1.2"
+  resolved "http://r.cnpmjs.org/globrex/download/globrex-0.1.2.tgz#dd5d9ec826232730cd6793a5e33a9302985e6098"
+  integrity sha1-3V2eyCYjJzDNZ5Ol4zqTApheYJg=
 
 globule@^1.0.0:
   version "1.2.1"
@@ -8996,6 +9017,14 @@ timers-browserify@^2.0.4:
   integrity sha1-gAsfPu4nLlvFPuRloE0OgEwxIR8=
   dependencies:
     setimmediate "^1.0.4"
+
+tiny-glob@^0.2.6:
+  version "0.2.6"
+  resolved "http://r.cnpmjs.org/tiny-glob/download/tiny-glob-0.2.6.tgz#9e056e169d9788fe8a734dfa1ff02e9b92ed7eda"
+  integrity sha1-ngVuFp2XiP6Kc036H/Aum5Ltfto=
+  dependencies:
+    globalyzer "^0.1.0"
+    globrex "^0.1.1"
 
 tiny-invariant@^1.0.2:
   version "1.0.6"

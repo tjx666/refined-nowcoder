@@ -19,7 +19,7 @@ chrome extension for [nowcoder](https://www.nowcoder.com)。
 -   屏蔽许愿贴
 -   屏蔽交友贴
 
-## :link: 参考资料
+## :link: Reference
 
 开发过程参考了以下资料：
 
