@@ -1,0 +1,107 @@
+.switch {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    min-width: 44px;
+    height: 22px;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 20px;
+    vertical-align: middle;
+    list-style: none;
+    font-feature-settings: 'tnum';
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid transparent;
+    border-radius: 100px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.36s;
+    user-select: none;
+
+    .inner-text {
+        display: block;
+        margin-right: 6px;
+        margin-left: 24px;
+        color: #fff;
+        font-size: 12px;
+    }
+
+    &::after {
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        width: 18px;
+        height: 18px;
+        background-color: #fff;
+        border-radius: 18px;
+        box-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
+        cursor: pointer;
+        transition: all 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+        content: ' ';
+    }
+
+    &:not(&-disabled):active::before,
+    &:not(&-disabled):active::after {
+        width: 24px;
+    }
+
+    &-small {
+        min-width: 28px;
+        height: 16px;
+        line-height: 14px;
+    }
+
+    &-small .inner-text {
+        margin-right: 3px;
+        margin-left: 18px;
+        font-size: 12px;
+    }
+
+    &-small::after {
+        width: 12px;
+        height: 12px;
+    }
+
+    &-small:active::before,
+    &-small:active::after {
+        width: 16px;
+    }
+
+    &-small &-checked .inner-text {
+        margin-right: 18px;
+        margin-left: 3px;
+    }
+
+    &-checked {
+        background-color: #1890ff;
+    }
+
+    &-checked .inner-text {
+        margin-right: 24px;
+        margin-left: 6px;
+    }
+
+    &-checked::after {
+        left: 100%;
+        margin-left: -1px;
+        -ms-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+
+    &-disabled {
+        cursor: not-allowed;
+        opacity: 0.4;
+    }
+
+    &-disabled * {
+        cursor: not-allowed;
+    }
+
+    &-disabled::before,
+    &-disabled::after {
+        cursor: not-allowed;
+    }
+}

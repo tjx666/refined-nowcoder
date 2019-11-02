@@ -16,10 +16,7 @@ const SettingCard = ({ title, children }: SettingCardProps) => {
                 <h2 className="title">{title}</h2>
             </div>
             <ul className="card-body">
-                <SettingRow label="自动打卡" subLabel="子标题" />
-                <SettingRow label="自动打卡" subLabel="子标题" />
-                <SettingRow label="自动打卡" subLabel="子标题" />
-                <SettingRow label="自动打卡" subLabel="子标题" />
+                <SettingRow label="自动打卡" subLabel="子标题" switchable />
                 {children}
             </ul>
         </div>

@@ -8,7 +8,7 @@ const header = (
     </header>
 );
 
-export const App = () => {
+const App = () => {
     return (
         <div className="app">
             {header}
@@ -20,3 +20,5 @@ export const App = () => {
         </div>
     );
 };
+
+export default App;
