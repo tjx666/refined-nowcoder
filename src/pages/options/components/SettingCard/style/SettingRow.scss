@@ -1,0 +1,19 @@
+.setting-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .label {
+        color: rgb(32, 33, 36);
+        font-size: 13px;
+    }
+
+    .sub-label {
+        color: rgb(95, 99, 104);
+        font-size: 13px;
+    }
+}

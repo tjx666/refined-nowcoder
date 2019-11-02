@@ -9,6 +9,7 @@ chrome extension for [nowcoder](https://www.nowcoder.com)
 -   [ ] 自动打卡
 -   [ ] 自定义屏蔽，指定需要屏蔽的帖子的标题中的关键字
 -   [ ] 消息通知（notification）
+-   [ ] 双击返回顶部
 
 ## :pencil: Changelog
 

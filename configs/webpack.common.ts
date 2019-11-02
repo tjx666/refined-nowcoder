@@ -133,7 +133,7 @@ const config: webpack.Configuration = {
         new HtmlWebpackPlugin({
             filename: 'options.html',
             chunks: ['options'],
-            title: 'options',
+            title: 'Refined Nowcoder - 选项与帮助',
             template: Path.resolve(__dirname, '../public/options.html'),
             inject: 'body',
             minify: false,

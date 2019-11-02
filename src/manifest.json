@@ -41,8 +41,8 @@
         }
     },
     "options_ui": {
-        "chrome_style": true,
-        "page": "options.html"
+        "page": "options.html",
+        "open_in_tab": true
     },
     "icons": {
         "16": "icons/get_started16.png",
