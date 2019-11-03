@@ -8,7 +8,7 @@ chrome extension for [nowcoder](https://www.nowcoder.com)
 - [ ] 自动打卡
 - [ ] 双击返回顶部
 
-## :octocat: Develop
+## :hammer_and_wrench: Develop
 
 ### 1. 克隆项目到本地
 
@@ -51,7 +51,7 @@ npm install
 
 进入到 `chrome://extensions` 扩展管理页面，打开右上角的开发者模式，点击加载已解压的扩展程序，选择项目中的 `dist` 文件夹，这样插件就安装完成了。
 
-![load chrome extension](https://i.loli.net/2019/11/03/lGAvmUDk94pCJB1.png)
+![load chrome extension](https://i.loli.net/2019/11/03/IExHN7Pu5FUwYqD.png)
 
 ## :pencil: Changelog
 
