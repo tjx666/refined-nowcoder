@@ -7,9 +7,9 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "start": "cross-env TS_NODE_PROJECT='./tsconfig-ts-node.json' webpack --config ./configs/webpack.dev.ts --watch --progress",
-        "build": "cross-env TS_NODE_PROJECT='./tsconfig-ts-node.json' webpack --config ./configs/webpack.prod.ts --watch --progress  -p",
-        "serve": "cross-env TS_NODE_PROJECT='./tsconfig-ts-node.json' webpack-dev-server --config ./configs/webpack.dev.ts --open",
+        "start": "cross-env TS_NODE_PROJECT='./tsconfig.tsnode.json' webpack --config ./configs/webpack.dev.ts --watch --progress",
+        "build": "cross-env TS_NODE_PROJECT='./tsconfig.tsnode.json' webpack --config ./configs/webpack.prod.ts --watch --progress  -p",
+        "serve": "cross-env TS_NODE_PROJECT='./tsconfig.tsnode.json' webpack-dev-server --config ./configs/webpack.dev.ts --open",
         "lint": "lint-staged"
     },
     "dependencies": {
