@@ -20,6 +20,8 @@
         "jest": "^24.9.0",
         "jquery": "^3.4.1",
         "lodash": "^4.17.15",
+        "minireset.css": "^0.0.6",
+        "normalize.css": "^8.0.1",
         "react": "^16.11.0",
         "react-dom": "^16.11.0",
         "react-router-dom": "^5.1.2",
