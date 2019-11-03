@@ -4,22 +4,20 @@ chrome extension for [nowcoder](https://www.nowcoder.com)
 
 ## :dart: TODO
 
--   [x] 屏蔽广告
--   [x] 屏蔽许愿
--   [ ] 自动打卡
--   [ ] 自定义屏蔽，指定需要屏蔽的帖子的标题中的关键字
--   [ ] 消息通知（notification）
--   [ ] 双击返回顶部
+- [x] 屏蔽许愿
+- [ ] 自动打卡
+- [ ] 消息通知（notification）
+- [ ] 双击返回顶部
 
 ## :pencil: Changelog
 
 `2019-10-29`
 
--   屏蔽讨论圈顶部横幅
--   屏蔽面试菜单项红标
--   屏蔽右下角热门推荐
--   屏蔽许愿贴
--   屏蔽交友贴
+- 屏蔽讨论圈顶部横幅
+- 屏蔽面试菜单项红标
+- 屏蔽右下角热门推荐
+- 屏蔽许愿贴
+- 屏蔽交友贴
 
 ## :link: Reference
 

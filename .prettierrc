@@ -5,5 +5,13 @@
     "singleQuote": true,
     "printWidth": 120,
     "arrowParens": "avoid",
-    "endOfLine": "auto"
+    "endOfLine": "auto",
+    "overrides": [
+        {
+            "files": "*.md",
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ],
 }
