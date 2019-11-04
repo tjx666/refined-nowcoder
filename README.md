@@ -4,7 +4,7 @@ chrome extension for [nowcoder](https://www.nowcoder.com)
 
 ## :dart: TODO
 
-- [x] 屏蔽许愿
+- [ ] 屏蔽许愿
 - [ ] 自动打卡
 - [ ] 双击返回顶部
 
@@ -31,7 +31,13 @@ npm install
 
 ### 3. 启动项目
 
-- 如果是开发 popup, options 这些有 HTML 文件入口的页面，应该使用 webpack-dev-server 启动项目：
+- 开发 popup，options 等用到 chrome API 页面或者像 background.js，content scripts 等没有实际的 HTML 页面的后台文件时，直接使用 webpack 打包并 watch 即可：
+
+  ```bash
+  npm start
+  ```
+
+- 如果是开发 有 HTML 文件入口的页面并且没有使用到 chrome API，应该使用 webpack-dev-server 启动项目：
 
   ```bash
   npm run serve
@@ -41,27 +47,25 @@ npm install
 
   借助 webpack-dev-server 的静态服务器托管页面和热更新的能力让你就像开发普通的 web 页面一样开发 chrome 扩展中的页面，开发页面时建议将页面此尺寸调整成实际页面大小进行开发。
 
-- 开发像 background.js，content scripts 等没有实际的 HTML 页面的后台文件时，直接使用 webpack 打包并 watch 即可：
-
-  ```bash
-  npm start
-  ```
-
 ### 4. 安装扩展
 
-进入到 `chrome://extensions` 扩展管理页面，打开右上角的开发者模式，点击加载已解压的扩展程序，选择项目中的 `dist` 文件夹，这样插件就安装完成了。
+进入到 `chrome://extensions` 扩展管理页面，点击右上角打开开发者模式，点击加载已解压的扩展程序，选择项目中的 `dist` 文件夹，这样扩展就安装完成了。
 
-![load chrome extension](https://i.loli.net/2019/11/03/IExHN7Pu5FUwYqD.png)
+![load local chrome extension](https://i.loli.net/2019/11/03/IExHN7Pu5FUwYqD.png)
+
+### 5. 调试 react 项目
+
+因为 chrome 的 react-devtools 扩展不能审查 chrome 页面，所以需要使用独立的 react-devtools 工具，例如调试 options 页面。在 `npm start` 启动项目的同时使用 `npx react-devtools` 命令启动独立的 react-devtools 工具窗口。
+
+**效果图：**
+
+![react-devtools](https://i.loli.net/2019/11/04/ujo8gBKqydxOpW9.png)
 
 ## :pencil: Changelog
 
-`2019-10-29`
+`2019-11-04`
 
-- 屏蔽讨论圈顶部横幅
-- 屏蔽面试菜单项红标
-- 屏蔽右下角热门推荐
-- 屏蔽许愿贴
-- 屏蔽交友贴
+- 新增选项与帮助页面
 
 ## :link: Reference
 
