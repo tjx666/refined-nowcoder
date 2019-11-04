@@ -13,7 +13,6 @@ interface Settings {
 const App = () => {
     const [settings, updateSettings] = React.useState<Settings>({ blockWish: false, blockMakeFriends: false });
 
-    // 同步线上的设置数据
     const syncOnlineSettings = React.useCallback(async () => {
         const { settings: onlineSetting } = await onlineStorage.get({
             settings: {
@@ -31,8 +30,9 @@ const App = () => {
     }, []);
 
     const getSettingsChangeHandler = (key: string) => {
+        console.log('generate handler key:', key, 'settings:', settings);
         return (checked: boolean) => {
-            console.log('current settings:', settings);
+            console.log('current setting:', settings);
             const newSettings = { ...settings, [key]: checked };
             onlineStorage.set({ settings: newSettings });
             updateSettings(newSettings);

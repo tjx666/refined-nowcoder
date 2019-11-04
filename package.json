@@ -8,6 +8,7 @@
     "private": true,
     "scripts": {
         "start": "cross-env TS_NODE_PROJECT='./tsconfig.tsnode.json' webpack --config ./configs/webpack.dev.ts --watch --progress",
+        "devtools": "react-devtools",
         "build": "cross-env TS_NODE_PROJECT='./tsconfig.tsnode.json' webpack --config ./configs/webpack.prod.ts --watch --progress  -p",
         "serve": "cross-env TS_NODE_PROJECT='./tsconfig.tsnode.json' webpack-dev-server --config ./configs/webpack.dev.ts --open",
         "lint": "lint-staged"
@@ -23,6 +24,7 @@
         "minireset.css": "^0.0.6",
         "normalize.css": "^8.0.1",
         "react": "^16.11.0",
+        "react-devtools": "^4.2.0",
         "react-dom": "^16.11.0",
         "react-router-dom": "^5.1.2",
         "react-use": "^12.9.0"
