@@ -30,8 +30,10 @@ const config: webpack.Configuration = {
         port: 3000,
         contentBase: './dist',
         hot: true,
+        disableHostCheck: true,
+        stats: 'minimal',
         writeToDisk: filePath => {
-            return /^(?!.+(?:hot-update.(js|json))).+$/.test(filePath);
+            return true;
         },
     },
     module: {
@@ -142,6 +144,7 @@ const config: webpack.Configuration = {
             { from: Path.resolve(__dirname, '../public'), ignore: ['*.html'] },
             { from: Path.resolve(__dirname, '../src/manifest.json') },
         ]),
+        new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
