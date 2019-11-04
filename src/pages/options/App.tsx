@@ -27,7 +27,7 @@ const App = () => {
 
     React.useEffect(() => {
         syncOnlineSettings();
-    }, []);
+    }, [syncOnlineSettings]);
 
     const getSettingsChangeHandler = (key: string) => {
         return (checked: boolean) => {
