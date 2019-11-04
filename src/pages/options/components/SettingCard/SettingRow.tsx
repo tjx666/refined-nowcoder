@@ -23,13 +23,16 @@ const SettingRow = ({ label, subLabel, extraType = 'none', checked, onChange }: 
         );
     }, [label, subLabel]);
 
-    const handleChange = React.useCallback((isChecked: boolean, event: React.MouseEvent) => {
-        onChange && onChange(isChecked, event);
-    }, []);
+    const handleChange = React.useCallback(
+        (isChecked: boolean, event: React.MouseEvent) => {
+            onChange && onChange(isChecked, event);
+        },
+        [onChange]
+    );
 
     return (
         <li className={settingRowClasses}>
-            {(function() {
+            {(function renderContent() {
                 switch (extraType) {
                     case 'switch':
                         return (

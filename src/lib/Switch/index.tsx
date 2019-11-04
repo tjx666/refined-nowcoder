@@ -45,7 +45,7 @@ const Switch = ({
             onClick && onClick(event);
             onChange && onChange(!computedCheckState, event);
         },
-        [checked, checkState]
+        [checked, checkState, onClick, onChange]
     );
 
     return (

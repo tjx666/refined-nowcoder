@@ -21,7 +21,7 @@ const App = () => {
             },
         });
 
-        console.log('online settings:', onlineSetting);
+        // console.log('online settings:', onlineSetting);
         updateSettings(onlineSetting);
     }, []);
 
@@ -30,9 +30,7 @@ const App = () => {
     }, []);
 
     const getSettingsChangeHandler = (key: string) => {
-        console.log('generate handler key:', key, 'settings:', settings);
         return (checked: boolean) => {
-            console.log('current setting:', settings);
             const newSettings = { ...settings, [key]: checked };
             onlineStorage.set({ settings: newSettings });
             updateSettings(newSettings);
