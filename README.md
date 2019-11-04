@@ -31,21 +31,11 @@ npm install
 
 ### 3. 启动项目
 
-- 开发 popup，options 等用到 chrome API 页面或者像 background.js，content scripts 等没有实际的 HTML 页面的后台文件时，直接使用 webpack 打包并 watch 即可：
+```bash
+npm start
+```
 
-  ```bash
-  npm start
-  ```
-
-- 如果是开发 有 HTML 文件入口的页面并且没有使用到 chrome API，应该使用 webpack-dev-server 启动项目：
-
-  ```bash
-  npm run serve
-  ```
-
-  上面的命令会自动打开浏览器窗口，地址：`http://localhost:3000`。打开的页面会显示 `dist` 文件夹下面的文件列表，点击你需要开发的那个页面就会进入到那个页面。
-
-  借助 webpack-dev-server 的静态服务器托管页面和热更新的能力让你就像开发普通的 web 页面一样开发 chrome 扩展中的页面，开发页面时建议将页面此尺寸调整成实际页面大小进行开发。
+专门为 chrome 扩展开发定制了 webpack ，你可以充分享受 webpack 的热更新。
 
 ### 4. 安装扩展
 
