@@ -1,26 +1,37 @@
 .setting-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+
     &:not(:last-child) {
         border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
 
-    label {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 12px 20px;
+    &-switch-type {
+        display: block;
+        padding: 0;
         cursor: pointer;
 
-        .label-wrapper {
-            font-size: 13px;
+        label {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+        }
+    }
 
-            .label {
-                color: rgb(32, 33, 36);
-            }
+    .label-wrapper {
+        font-size: 13px;
 
-            .sub-label {
-                color: rgb(95, 99, 104);
-            }
+        .label {
+            color: rgb(32, 33, 36);
+        }
+
+        .sub-label {
+            color: rgb(95, 99, 104);
         }
     }
 }
