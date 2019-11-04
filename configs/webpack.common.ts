@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-unused-vars */
 import Path from 'path';
 import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
