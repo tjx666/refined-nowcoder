@@ -6,6 +6,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 const srcDir = Path.resolve(__dirname, '../src');
 const entry: webpack.Entry = {
@@ -16,7 +17,9 @@ const entry: webpack.Entry = {
     options: 'pages/options/index.tsx',
 };
 Object.entries(entry).forEach(([name, path]) => {
-    entry[name] = Path.resolve(srcDir, path as string);
+    if (typeof path === 'string') {
+        entry[name] = Path.resolve(srcDir, path);
+    }
 });
 
 const config: webpack.Configuration = {
@@ -44,9 +47,9 @@ const config: webpack.Configuration = {
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
+                test: /\.(ts|js)x?$/,
                 exclude: /node_modules/,
+                loader: 'babel-loader',
             },
             {
                 test: /\.css$/,
@@ -128,6 +131,7 @@ const config: webpack.Configuration = {
         ],
     },
     plugins: [
+        new ForkTsCheckerWebpackPlugin(),
         new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
         new HtmlWebpackPlugin({
             filename: 'popup.html',
@@ -160,7 +164,7 @@ const config: webpack.Configuration = {
             '@': srcDir,
             utils: Path.resolve(srcDir, './utils'),
         },
-        extensions: ['.tsx', '.ts', '.js'],
+        extensions: ['.ts', '.tsx', '.js', '.json'],
     },
 };
 
