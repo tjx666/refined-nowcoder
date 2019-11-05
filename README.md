@@ -31,11 +31,17 @@ npm install
 
 ### 3. 启动项目
 
-```bash
-npm start
-```
+- 开发 content scripts 时 webpack 的 HMR 目前没法用，只能手动点击扩展管理页面的加载按钮重新加载扩展，启动命令：
 
-专门为 chrome 扩展开发定制了 webpack ，你可以充分享受 webpack 的热更新。
+  ```bash
+  npm start
+  ```
+
+- 其它情况下一般都可以直接使用 webpack-dev-server，我专门为 chrome 扩展开发定制了 webpack ，你可以充分享受 webpack 的热更新，启动命令：
+
+  ```bash
+  npm run serve
+  ```
 
 ### 4. 安装扩展
 

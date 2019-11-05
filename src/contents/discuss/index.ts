@@ -15,3 +15,5 @@ const blockPosts = () => {
 };
 
 // blockPosts();
+
+console.log('hello world');
