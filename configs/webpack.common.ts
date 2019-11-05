@@ -35,6 +35,9 @@ const config: webpack.Configuration = {
     devServer: {
         port: 3000,
         contentBase: './dist',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+        },
         hot: true,
         disableHostCheck: true,
         stats: {
