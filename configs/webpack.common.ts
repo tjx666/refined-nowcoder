@@ -8,15 +8,19 @@ import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const srcDir = Path.resolve(__dirname, '../src');
+const entry: webpack.Entry = {
+    background: 'background.ts',
+    all: 'contents/all/index.ts',
+    discuss: 'contents/discuss/index.ts',
+    popup: 'pages/popup/index.tsx',
+    options: 'pages/options/index.tsx',
+};
+Object.entries(entry).forEach(([name, path]) => {
+    entry[name] = Path.resolve(srcDir, path as string);
+});
 
 const config: webpack.Configuration = {
-    entry: {
-        background: Path.resolve(srcDir, 'background.ts'),
-        all: Path.resolve(srcDir, 'contents/all/index.ts'),
-        discuss: Path.resolve(srcDir, 'contents/discuss/index.ts'),
-        popup: Path.resolve(srcDir, 'pages/popup/index.tsx'),
-        options: Path.resolve(srcDir, 'pages/options/index.tsx'),
-    },
+    entry,
     output: {
         publicPath: '/',
         path: Path.resolve(__dirname, '../dist'),
@@ -31,30 +35,11 @@ const config: webpack.Configuration = {
         hot: true,
         disableHostCheck: true,
         stats: {
-            all: false,
-            assets: true,
-            builtAt: true,
-            cached: true,
-            cachedAssets: true,
-            colors: true,
-            entrypoints: true,
-            env: true,
-            hash: true,
-            modules: true,
-            maxModules: 0,
-            performance: true,
-            publicPath: true,
-            reasons: true,
-            usedExports: false,
-            version: true,
-            errors: true,
-            warnings: true,
-            moduleTrace: true,
-            errorDetails: true,
+            children: false,
+            chunks: false,
+            modules: false,
         },
-        writeToDisk: filePath => {
-            return true;
-        },
+        writeToDisk: true,
     },
     module: {
         rules: [
