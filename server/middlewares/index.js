@@ -8,12 +8,7 @@ function createWebpackMiddleware(compiler, publicPath) {
         headers: {
             'Access-Control-Allow-Origin': '*',
         },
-        stats: {
-            colors: true,
-            children: false,
-            chunks: false,
-            modules: false,
-        },
+        stats: 'minimal',
         writeToDisk: true,
     };
 
@@ -24,5 +19,5 @@ module.exports = function addDevMiddlewares(app, webpackConfig) {
     const compiler = webpack(webpackConfig);
     const middleware = createWebpackMiddleware(compiler, webpackConfig.output.publicPath);
     app.use(middleware);
-    app.use(webpackHotMiddleware(compiler));
+    app.use(webpackHotMiddleware(compiler, { path: '/__webpack_HMR__' }));
 };

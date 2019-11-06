@@ -58,7 +58,7 @@ const App = () => {
                             onChange={getSettingsChangeHandler('blockWish')}
                         />
                         <SettingRow
-                            label="屏蔽交友贴"
+                            label="屏蔽交友"
                             extraType="switch"
                             checked={settings.blockMakeFriends}
                             onChange={getSettingsChangeHandler('blockMakeFriends')}

@@ -1,21 +1,24 @@
 const fs = require('fs-extra');
 const { resolve } = require('path');
+const serverConfig = require('../configs/server');
 
 const srcPath = resolve(__dirname, '../../src');
-const entry = {};
+const serverPath = `http://${serverConfig.HOST}:${serverConfig.PORT}/__webpack_HMR__`;
+const HMRClientScript = `webpack-hot-middleware/client?path=${encodeURIComponent(serverPath)}&reload=true`;
+const entry = {
+    background: [HMRClientScript, resolve(srcPath, 'background.ts')],
+};
 
 const entryDirs = ['contents', 'pages'];
 entryDirs.forEach(dir => {
     const entryNames = fs.readdirSync(resolve(srcPath, dir));
     entryNames.forEach(name => {
-        entry[name] = resolve(srcPath, `${dir}/${name}/index.${dir === 'contents' ? 'ts' : 'tsx'}`);
+        if (dir === 'contents') {
+            entry[name] = resolve(srcPath, `${dir}/${name}/index.ts`);
+        } else {
+            entry[name] = [HMRClientScript, resolve(srcPath, `${dir}/${name}/index.tsx`)];
+        }
     });
 });
-
-const extraEntry = {
-    background: resolve(srcPath, 'background.ts'),
-};
-
-Object.assign(entry, extraEntry);
 
 module.exports = entry;
