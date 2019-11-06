@@ -131,6 +131,7 @@ module.exports = {
     ],
     resolve: {
         alias: {
+            'react-dom': '@hot-loader/react-dom',
             '@': resolve(projectRoot, 'src'),
             utils: resolve(projectRoot, 'src/utils'),
         },

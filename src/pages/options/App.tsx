@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root';
 import * as React from 'react';
 import { onlineStorage } from 'utils/storage.ts';
 import { SettingCard } from './components';
@@ -58,7 +59,7 @@ const App = () => {
                             onChange={getSettingsChangeHandler('blockWish')}
                         />
                         <SettingRow
-                            label="屏蔽交友"
+                            label="屏蔽交友贴"
                             extraType="switch"
                             checked={settings.blockMakeFriends}
                             onChange={getSettingsChangeHandler('blockMakeFriends')}
@@ -70,4 +71,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default hot(App);

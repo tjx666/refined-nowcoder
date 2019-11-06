@@ -3,8 +3,8 @@ const { resolve } = require('path');
 const serverConfig = require('../configs/server');
 
 const srcPath = resolve(__dirname, '../../src');
-const serverPath = `http://${serverConfig.HOST}:${serverConfig.PORT}/__webpack_HMR__`;
-const HMRClientScript = `webpack-hot-middleware/client?path=${encodeURIComponent(serverPath)}&reload=true`;
+const serverPath = encodeURIComponent(`http://${serverConfig.HOST}:${serverConfig.PORT}/__webpack_HMR__`);
+const HMRClientScript = `webpack-hot-middleware/client?path=${serverPath}&reload=true`;
 const entry = {
     background: [HMRClientScript, resolve(srcPath, 'background.ts')],
 };
@@ -16,7 +16,7 @@ entryDirs.forEach(dir => {
         if (dir === 'contents') {
             entry[name] = resolve(srcPath, `${dir}/${name}/index.ts`);
         } else {
-            entry[name] = [HMRClientScript, resolve(srcPath, `${dir}/${name}/index.tsx`)];
+            entry[name] = ['react-hot-loader/patch', HMRClientScript, resolve(srcPath, `${dir}/${name}/index.tsx`)];
         }
     });
 });
