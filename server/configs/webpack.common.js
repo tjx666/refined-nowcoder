@@ -1,64 +1,34 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import Path from 'path';
-import webpack from 'webpack';
-import autoprefixer from 'autoprefixer';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import CopyPlugin from 'copy-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+const { resolve } = require('path');
+const autoprefixer = require('autoprefixer');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const entry = require('../utils/entry');
 
-const srcDir = Path.resolve(__dirname, '../src');
-const entry: webpack.Entry = {
-    background: 'background.ts',
-    all: 'contents/all/index.ts',
-    discuss: 'contents/discuss/index.ts',
-    popup: 'pages/popup/index.tsx',
-    options: 'pages/options/index.tsx',
-};
-Object.entries(entry).forEach(([name, path]) => {
-    if (typeof path === 'string') {
-        entry[name] = Path.resolve(srcDir, path);
-    }
-});
+const projectRoot = resolve(__dirname, '../../');
 
-const config: webpack.Configuration = {
+module.exports = {
     entry,
     output: {
         publicPath: '/',
-        path: Path.resolve(__dirname, '../dist'),
+        path: resolve(projectRoot, 'dist'),
         filename: 'js/[name].js',
         hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
         hotUpdateMainFilename: 'hot/[hash].hot-update.json',
-    },
-    devtool: 'eval-source-map',
-    devServer: {
-        port: 3000,
-        contentBase: './dist',
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-        },
-        hot: true,
-        disableHostCheck: true,
-        stats: {
-            children: false,
-            chunks: false,
-            modules: false,
-        },
-        writeToDisk: true,
     },
     module: {
         rules: [
             {
                 test: /\.(ts|js)x?$/,
-                exclude: /node_modules/,
                 loader: 'babel-loader',
+                exclude: /node_modules/,
             },
             {
                 test: /\.css$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    { loader: 'css-loader', options: { importLoaders: 1 } },
+                    { loader: 'css-loader', options: { constLoaders: 1 } },
                     {
                         loader: 'postcss-loader',
                         options: {
@@ -134,13 +104,12 @@ const config: webpack.Configuration = {
         ],
     },
     plugins: [
-        new ForkTsCheckerWebpackPlugin(),
         new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
         new HtmlWebpackPlugin({
             filename: 'popup.html',
             chunks: ['popup'],
             title: 'popup',
-            template: Path.resolve(__dirname, '../public/popup.html'),
+            template: resolve(projectRoot, 'public/popup.html'),
             inject: 'body',
             minify: false,
         }),
@@ -148,27 +117,23 @@ const config: webpack.Configuration = {
             filename: 'options.html',
             chunks: ['options'],
             title: 'Refined Nowcoder - 选项与帮助',
-            template: Path.resolve(__dirname, '../public/options.html'),
+            template: resolve(projectRoot, 'public/options.html'),
             inject: 'body',
             minify: false,
         }),
         new CopyPlugin([
-            { from: Path.resolve(__dirname, '../public'), ignore: ['*.html'] },
-            { from: Path.resolve(__dirname, '../src/manifest.json') },
+            { from: resolve(projectRoot, 'public'), ignore: ['*.html'] },
+            { from: resolve(projectRoot, 'src/manifest.json') },
         ]),
-        new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
         }),
     ],
     resolve: {
         alias: {
-            '@': srcDir,
-            utils: Path.resolve(srcDir, './utils'),
+            '@': resolve(projectRoot, 'src'),
+            utils: resolve(projectRoot, 'src/utils'),
         },
         extensions: ['.ts', '.tsx', '.js', '.json'],
     },
 };
-
-export default config;

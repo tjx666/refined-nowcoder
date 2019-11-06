@@ -27,17 +27,19 @@
         }
     },
     "rules": {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "react/jsx-filename-extension": "off",
+        "react/jsx-indent": "off",
+        "react/jsx-indent-props": ["error", 4],
+        "jsx-a11y/label-has-associated-control": "off",
         "prettier/prettier": "off",
         "import/prefer-default-export": "off",
         "no-unused-expressions": "off",
         "no-console": "off",
         "func-names": "off",
         "no-unused-vars": "off",
-        "react/jsx-filename-extension": "off",
-        "react/jsx-indent": "off",
-        "react/jsx-indent-props": ["error", 4],
-        "jsx-a11y/label-has-associated-control": "off",
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn"
+        "global-require": "off",
+        "import/no-extraneous-dependencies": "off"
     }
 }
