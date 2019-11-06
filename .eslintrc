@@ -40,6 +40,9 @@
         "func-names": "off",
         "no-unused-vars": "off",
         "global-require": "off",
-        "import/no-extraneous-dependencies": "off"
+        "import/no-extraneous-dependencies": "off",
+        "no-param-reassign": "off",
+        "no-underscore-dangle": "off",
+        "no-inner-declarations": "off"
     }
 }

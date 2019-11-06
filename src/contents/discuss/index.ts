@@ -2,7 +2,6 @@ import $ from 'jquery';
 // import { onlineStorage } from 'utils/storage';
 import './style.scss';
 
-console.log(62299);
 const blockPosts = () => {
     const $postLis = $('.nk-content .common-list li');
     $postLis.each(function() {
@@ -15,5 +14,3 @@ const blockPosts = () => {
 };
 
 // blockPosts();
-
-console.log('hello world');

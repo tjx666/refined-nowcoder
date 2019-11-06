@@ -14,6 +14,8 @@ entryDirs.forEach(dir => {
     const entryNames = fs.readdirSync(resolve(srcPath, dir));
     entryNames.forEach(name => {
         if (dir === 'contents') {
+            // const contentScriptsAutoReloadPatch = resolve(__dirname, './extensionAutoReloadPatch.js');
+            // entry[name] = [contentScriptsAutoReloadPatch, resolve(srcPath, `${dir}/${name}/index.ts`)];
             entry[name] = resolve(srcPath, `${dir}/${name}/index.ts`);
         } else {
             entry[name] = ['react-hot-loader/patch', HMRClientScript, resolve(srcPath, `${dir}/${name}/index.tsx`)];
