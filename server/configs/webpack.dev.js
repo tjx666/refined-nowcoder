@@ -7,7 +7,7 @@ const devConfig = {
     mode: 'development',
     devtool: 'eval-source-map',
     plugins: [
-        new ForkTsCheckerWebpackPlugin(),
+        new ForkTsCheckerWebpackPlugin({ memoryLimit: 1024 }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
     ],

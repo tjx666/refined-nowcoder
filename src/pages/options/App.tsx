@@ -3,15 +3,9 @@ import * as React from 'react';
 import { onlineStorage } from 'utils/storage.ts';
 import { SettingCard } from './components';
 import './App.scss';
+import Settings from '@/types/Settings';
 
 const { SettingRow } = SettingCard;
-
-interface Settings {
-    blockWish?: boolean;
-    blockMakeFriends?: boolean;
-}
-
-console.log(123);
 
 const App = () => {
     const [settings, updateSettings] = React.useState<Settings>({ blockWish: false, blockMakeFriends: false });
