@@ -31,17 +31,19 @@ npm install
 
 ### 3. 启动项目
 
-- 开发 content scripts 时 webpack 的 HMR 目前没法用，只能手动点击扩展管理页面的加载按钮重新加载扩展，启动命令：
+花了我挺多精力处理 webpack 热更新的问题，目前基本上完美解决了各种扩展页面的热更新问题。
 
-  ```bash
-  npm start
-  ```
+不过 content scripts 没法局部刷新，根本原因是因为 webpack 采用的是 jsonp 拉取更新补丁，而更新补丁那个 js 文件由于 chrome 限制，是文法访问 content script 脚本中的 webpackHotUpdate 函数的，所以 content scripts 无法做到热更新，但是我做到了如果你修改了 content scripts 的代码，被植入 content scripts 的代码页面会先自动 reload 扩展，再自动刷新页面。
 
-- 其它情况下一般都可以直接使用 webpack-dev-server，我专门为 chrome 扩展开发定制了 webpack ，你可以充分享受 webpack 的热更新，启动命令：
+具体原理：
 
-  ```bash
-  npm run serve
-  ```
+给 webpack compiler 的 done 事件挂了个钩子，这个钩子会检查你修改的 module 的 entry 是不是 content scripts 之一，如果是就会通过 SSE 推送消息给注入了 content scripts 的页面。所有的注入了 content scripts 页面也都注入了一个 ExtensionAutoReloadPatch.js 的补丁，这个补丁获取到 SSE 的消息后会和 background.js 通信，让 background,js 去 reload 扩展，再过 1s 后 reload 当前页面
+
+会其它页面如 options, popup, background 热更新都是正常的，包括 react 组件的局部刷新都配置好了。启动项目直接使用：
+
+```bash
+npm start
+```
 
 ### 4. 安装扩展
 
