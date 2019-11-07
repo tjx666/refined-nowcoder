@@ -9,6 +9,7 @@ function createWebpackMiddleware(compiler, publicPath) {
         headers: {
             'Access-Control-Allow-Origin': '*',
         },
+        lazy: false,
         stats: 'minimal',
         writeToDisk: true,
     };

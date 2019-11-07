@@ -31,10 +31,22 @@ if (!window.__loaded_extensionAutoReloadPath__) {
             'compiled',
             event => {
                 if (event.data === 'reload-extension') {
-                    chrome.runtime.sendMessage({
-                        from: 'refined-nowcoder-content-script',
-                        action: 'reload-whole-extension',
-                    });
+                    chrome.runtime.sendMessage(
+                        {
+                            from: 'refined-nowcoder-content-script',
+                            action: 'reload-whole-extension',
+                        },
+                        response => {
+                            if (response.from === 'background') {
+                                if (response.action === 'refresh-current-page') {
+                                    source.close();
+                                    setTimeout(() => {
+                                        window.location.reload();
+                                    }, 1000);
+                                }
+                            }
+                        }
+                    );
                 }
             },
             false

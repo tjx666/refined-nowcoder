@@ -1,6 +1,6 @@
 const SseStream = require('ssestream');
-// const { resolve } = require('path');
-// const fse = require('fs-extra');
+const fs = require('fs-extra');
+const Path = require('path');
 
 module.exports = function extensionAutoReload(compiler) {
     const middleware = function(req, res, next) {
@@ -9,25 +9,32 @@ module.exports = function extensionAutoReload(compiler) {
         sseStream.pipe(res);
 
         compiler.hooks.done.tapPromise('extension-auto-reload-plugin', stats => {
-            // fse.writeFile(resolve(__dirname, './stats.json'), stats.toString({ all: true }));
-            // eslint-disable-next-line no-shadow
             return new Promise((resolve, reject) => {
-                const success = sseStream.write(
-                    {
-                        event: 'compiled',
-                        data: 'reload-extension',
-                    },
-                    'UTF-8',
-                    error => {
-                        if (error) {
-                            reject(error);
-                        } else {
-                            resolve();
+                const { modules } = stats.toJson({ all: false, modules: true });
+                const contentScriptsEntries = fs.readdirSync(Path.resolve(__dirname, '../../src/contents'));
+                const contentScriptsChange =
+                    modules && modules.length === 1 && contentScriptsEntries.includes(modules[0].chunks[0]);
+                if (contentScriptsChange) {
+                    console.log('Send chrome extension reload signal!');
+                    const success = sseStream.write(
+                        {
+                            event: 'compiled',
+                            data: 'reload-extension',
+                        },
+                        'UTF-8',
+                        error => {
+                            if (error) {
+                                reject(error);
+                            } else {
+                                resolve();
+                            }
                         }
-                    }
-                );
+                    );
 
-                success && resolve();
+                    success && resolve();
+                } else {
+                    resolve();
+                }
             });
         });
 

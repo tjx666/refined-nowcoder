@@ -13,7 +13,7 @@ app.listen(serverConfig.PORT, serverConfig.HOST, async error => {
     } else {
         console.log(`Server started ! ${chalk.green('✓')}`);
         const address = chalk.green.underline(`http://${serverConfig.HOST}:${serverConfig.PORT}`);
-        console.log(`DevServer access address: ${address}`);
+        console.log(`Access address: ${address}`);
     }
 });
 

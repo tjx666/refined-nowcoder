@@ -11,6 +11,8 @@ interface Settings {
     blockMakeFriends?: boolean;
 }
 
+console.log(123);
+
 const App = () => {
     const [settings, updateSettings] = React.useState<Settings>({ blockWish: false, blockMakeFriends: false });
 

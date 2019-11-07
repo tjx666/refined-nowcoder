@@ -17,6 +17,9 @@ module.exports = {
         hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
         hotUpdateMainFilename: 'hot/[hash].hot-update.json',
     },
+    watchOptions: {
+        ignored: /node_modules/,
+    },
     module: {
         rules: [
             {
