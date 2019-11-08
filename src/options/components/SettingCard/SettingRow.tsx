@@ -6,12 +6,13 @@ import './style/SettingRow.scss';
 interface SettingRowProps {
     label?: string;
     subLabel?: string;
+    children?: React.ReactNode;
     extraType?: 'none' | 'switch' | 'link' | '__blank';
     checked?: boolean;
     onChange?: (checked: boolean, event: MouseEvent) => void;
 }
 
-const SettingRow = ({ label, subLabel, extraType = 'none', checked, onChange }: SettingRowProps) => {
+const SettingRow = ({ label, subLabel, children, extraType = 'none', checked, onChange }: SettingRowProps) => {
     const settingRowClasses = classnames({ 'setting-row': true, 'setting-row-switch-type': extraType === 'switch' });
 
     const labels = React.useMemo(() => {
@@ -42,7 +43,7 @@ const SettingRow = ({ label, subLabel, extraType = 'none', checked, onChange }: 
                             </label>
                         );
                     default:
-                        return labels;
+                        return [labels, children];
                 }
             })()}
         </li>

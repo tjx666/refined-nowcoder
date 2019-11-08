@@ -18,7 +18,6 @@ const App = () => {
             },
         });
 
-        // console.log('online settings:', onlineSetting);
         updateSettings(onlineSetting);
     }, []);
 

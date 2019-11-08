@@ -133,14 +133,6 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
         new HtmlWebpackPlugin({
-            filename: 'popup.html',
-            chunks: ['popup'],
-            title: 'popup',
-            template: resolve(projectRoot, 'public/popup.html'),
-            inject: 'body',
-            minify: false,
-        }),
-        new HtmlWebpackPlugin({
             filename: 'options.html',
             chunks: ['options'],
             title: 'Refined Nowcoder - 选项与帮助',

@@ -1,7 +1,7 @@
 const express = require('express');
 const chalk = require('chalk');
 const webpackDevConfig = require('./configs/webpack.dev');
-const addDevMiddleWares = require('./middlewares');
+const addDevMiddleWares = require('./middlewares/addDevMiddlewares');
 const serverConfig = require('./configs/server');
 
 const app = express();
