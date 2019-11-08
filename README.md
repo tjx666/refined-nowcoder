@@ -54,7 +54,7 @@ npm start
 
 ### 5. 调试 react 项目
 
-因为 chrome 的 react-devtools 扩展不能审查 chrome 页面，所以需要使用独立的 [react-devtools](https://www.npmjs.com/package/react-devtools](https://www.npmjs.com/package/react-devtools)工具。启动命令：
+因为 chrome 的 react-devtools 扩展不能审查 chrome 页面，所以需要使用独立的 [react-devtools](https://www.npmjs.com/package/react-devtools) 工具。启动命令：
 
 ```javascript
 npm run devtools
