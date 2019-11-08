@@ -42,6 +42,30 @@ module.exports = {
                 ],
             },
             {
+                test: /\.less$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            ident: 'postcss',
+                            plugins: [autoprefixer({})],
+                        },
+                    },
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            // 使用 modifyVars 可以修改 antd 主题
+                            modifyVars: {},
+                            javascriptEnabled: true,
+                        },
+                    },
+                ],
+            },
+            {
                 test: /\.s[ac]ss$/i,
                 use: [
                     MiniCssExtractPlugin.loader,

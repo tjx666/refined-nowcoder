@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { Switch } from 'antd';
 import classnames from 'classnames';
-import { Switch } from '@/lib';
 import './style/SettingRow.scss';
 
 interface SettingRowProps {
@@ -8,7 +8,7 @@ interface SettingRowProps {
     subLabel?: string;
     extraType?: 'none' | 'switch' | 'link' | '__blank';
     checked?: boolean;
-    onChange?: (checked: boolean, event: React.MouseEvent) => void;
+    onChange?: (checked: boolean, event: MouseEvent) => void;
 }
 
 const SettingRow = ({ label, subLabel, extraType = 'none', checked, onChange }: SettingRowProps) => {
@@ -24,7 +24,7 @@ const SettingRow = ({ label, subLabel, extraType = 'none', checked, onChange }: 
     }, [label, subLabel]);
 
     const handleChange = React.useCallback(
-        (isChecked: boolean, event: React.MouseEvent) => {
+        (isChecked: boolean, event: MouseEvent) => {
             onChange && onChange(isChecked, event);
         },
         [onChange]
@@ -38,7 +38,7 @@ const SettingRow = ({ label, subLabel, extraType = 'none', checked, onChange }: 
                         return (
                             <label>
                                 {labels}
-                                <Switch checked={checked} onChange={handleChange} />
+                                <Switch size="small" checked={checked} onChange={handleChange} />
                             </label>
                         );
                     default:

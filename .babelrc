@@ -16,5 +16,17 @@
         "@babel/typescript",
         "@babel/react"
     ],
-    "plugins": ["@babel/proposal-class-properties", "@babel/proposal-object-rest-spread", "react-hot-loader/babel"]
+    "plugins": [
+        "@babel/proposal-class-properties",
+        "@babel/proposal-object-rest-spread",
+        "react-hot-loader/babel",
+        [
+            "import",
+            {
+                "libraryName": "antd",
+                "library": "lib",
+                "style": true
+            }
+        ]
+    ]
 }
