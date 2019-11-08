@@ -1,1 +1,13 @@
-// ...
+.block-post-infos {
+    font-style: italic;
+    text-align: center;
+
+    .show-block-posts-switch {
+        color: #25bb9b;
+        cursor: pointer;
+
+        &:active {
+            color: #25bb9a4b;
+        }
+    }
+}

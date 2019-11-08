@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 import $ from 'jquery';
 import { onlineStorage } from 'utils/storage';
 import './style.scss';
@@ -9,8 +10,11 @@ import './style.scss';
             settings: { blockWish, blockMakeFriends },
         } = data;
 
-        const $postLis = $('.nk-content .common-list li');
-        $postLis.each(function() {
+        const $postsLis = $('.nk-content .common-list li');
+        let blockWishCount = 0;
+        let blockMakeFriendsCount = 0;
+        const blockedPostsLis: HTMLElement[] = [];
+        $postsLis.each(function() {
             const links = $(this).find('.discuss-main a');
             if (links.length >= 1) {
                 const title = links[0]!.textContent!;
@@ -24,7 +28,9 @@ import './style.scss';
 
                     if (shouldBlock) {
                         console.log(title);
-                        $(this).remove();
+                        $(this).css('display', 'none');
+                        blockedPostsLis.push(this);
+                        blockWishCount++;
                     }
                 }
 
@@ -37,10 +43,41 @@ import './style.scss';
 
                     if (shouldBlock) {
                         console.log(title);
-                        $(this).remove();
+                        $(this).css('display', 'none');
+                        blockedPostsLis.push(this);
+                        blockMakeFriendsCount++;
                     }
                 }
             }
         });
+
+        if ((blockWish || blockMakeFriends) && blockWishCount + blockMakeFriendsCount > 0) {
+            const blockWishInfos = blockWish && blockWishCount !== 0 ? blockWishCount + '条许愿贴&nbsp;' : '';
+            const blockMakeFriendsInfos =
+                blockMakeFriends && blockMakeFriendsCount !== 0 ? blockMakeFriendsCount + '条交友贴' : '';
+            const blockInfosInnerHTML = `已屏蔽：${blockWishInfos}${blockMakeFriendsInfos}&nbsp;<span class="show-block-posts-switch">显示</span>`;
+
+            const blockInfosElement = document.createElement('p');
+            blockInfosElement.innerHTML = blockInfosInnerHTML;
+            $('.nk-container .nk-main .nk-content').append(blockInfosElement);
+            $(blockInfosElement).addClass('block-post-infos');
+
+            let blocked = true;
+            $('.show-block-posts-switch').click(function() {
+                if (blocked) {
+                    blockedPostsLis.forEach(blockPostLi => {
+                        $(blockPostLi).css('display', 'block');
+                    });
+                    blocked = false;
+                    $(this).text('屏蔽');
+                } else {
+                    blockedPostsLis.forEach(blockPostLi => {
+                        $(blockPostLi).css('display', 'none');
+                    });
+                    blocked = true;
+                    $(this).text('显示');
+                }
+            });
+        }
     });
 })();

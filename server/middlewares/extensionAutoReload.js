@@ -12,27 +12,29 @@ module.exports = function extensionAutoReload(compiler) {
         sseStream.pipe(res);
 
         // 防抖处理
+        const contentScriptsEntries = fs.readdirSync(Path.resolve(__dirname, '../../src/contents'));
         const callback = debounce(stats => {
             const { modules } = stats.toJson({ all: false, modules: true });
-            const contentScriptsEntries = fs.readdirSync(Path.resolve(__dirname, '../../src/contents'));
-            const contentScriptsChange =
-                modules && modules.length === 1 && contentScriptsEntries.includes(modules[0].chunks[0]);
-            if (contentScriptsChange) {
-                console.log('Send chrome extension reload signal!');
-                sseStream.write(
-                    {
-                        event: 'compiled',
-                        data: 'reload-extension',
-                    },
-                    'UTF-8',
-                    error => {
-                        if (error) {
-                            console.error(error);
+            if (!stats.hasErrors()) {
+                const contentScriptsChange =
+                    modules.length === 1 && contentScriptsEntries.includes(modules[0].chunks[0]);
+                if (contentScriptsChange) {
+                    console.log('Send chrome extension reload signal!');
+                    sseStream.write(
+                        {
+                            event: 'compiled',
+                            data: 'reload-extension',
+                        },
+                        'UTF-8',
+                        error => {
+                            if (error) {
+                                console.error(error);
+                            }
                         }
-                    }
-                );
+                    );
+                }
             }
-        }, 1500);
+        }, 1000);
 
         // 断开链接后之前的 hook 就不要执行了
         const plugin = stats => !closed && callback(stats);

@@ -4,7 +4,8 @@ chrome extension for [nowcoder](https://www.nowcoder.com)
 
 ## :dart: TODO
 
-- [ ] 屏蔽许愿
+- [x] 屏蔽许愿
+- [x] 屏蔽交友
 - [ ] 自动打卡
 - [ ] 双击返回顶部
 
@@ -60,6 +61,10 @@ npm start
 ![react-devtools](https://i.loli.net/2019/11/04/ujo8gBKqydxOpW9.png)
 
 ## :pencil: Changelog
+
+`2019-11-8`
+
+支持屏蔽许愿贴和交友贴
 
 `2019-11-04`
 

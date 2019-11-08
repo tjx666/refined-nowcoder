@@ -42,7 +42,7 @@ if (!window.__loaded_extensionAutoReloadPath__) {
                                     source.close();
                                     setTimeout(() => {
                                         window.location.reload();
-                                    }, 1000);
+                                    }, 200);
                                 }
                             }
                         }
