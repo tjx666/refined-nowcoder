@@ -1,7 +1,7 @@
 import { hot } from 'react-hot-loader/root';
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Home } from './pages';
+import { Home, AutoClock } from './pages';
 import './App.scss';
 
 const App = () => {
@@ -17,11 +17,16 @@ const App = () => {
         <div className="app">
             {header}
             <div className="main-container">
-                <Switch>
-                    <Route path="/">
-                        <Home />
-                    </Route>
-                </Switch>
+                <main className="home">
+                    <Switch>
+                        <Route path="/" exact>
+                            <Home />
+                        </Route>
+                        <Route path="/autoClock">
+                            <AutoClock />
+                        </Route>
+                    </Switch>
+                </main>
             </div>
         </div>
     );

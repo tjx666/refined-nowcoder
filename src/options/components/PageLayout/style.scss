@@ -1,0 +1,15 @@
+.page-layout {
+    background-color: white;
+    box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
+
+    .top {
+        padding-top: 20px;
+        padding-left: 20px;
+
+        .back-to-arrow {
+            margin-right: 16px;
+            color: rgb(95, 99, 104);
+            font-size: 14px;
+        }
+    }
+}
