@@ -6,7 +6,7 @@ chrome extension for [nowcoder](https://www.nowcoder.com)
 
 - [x] 屏蔽许愿
 - [x] 屏蔽交友
-- [ ] 自动打卡
+- [x] 自动打卡
 - [ ] 双击返回顶部
 
 ## :hammer_and_wrench: Develop
@@ -67,6 +67,10 @@ npm run devtools
 ![react-devtools](https://i.loli.net/2019/11/04/ujo8gBKqydxOpW9.png)
 
 ## :pencil: Changelog
+
+`2019-11-9`
+
+支持自动打卡
 
 `2019-11-8`
 
