@@ -1,0 +1,8 @@
+{
+    "blockWish": false, // 是否屏蔽许愿贴
+    "blockMakeFriends": false, // 是否屏蔽交友贴
+    "autoClock": false, // 是否开启自动打卡
+    "feeling": "", // 打开内容
+    "lastClockDate": "", // 上次打卡日期
+    "autoClockFailed": false, // 自动打卡失败
+}

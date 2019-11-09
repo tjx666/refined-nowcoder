@@ -9,27 +9,28 @@ const { TextArea } = Input;
 
 const AutoClock = () => {
     const [autoClock, setAutoClock] = React.useState(false);
-    const [clockContent, setClockContent] = React.useState('');
+    const [feeling, setFeeling] = React.useState('');
 
     React.useEffect(() => {
         onlineStorage
-            .get({ autoClock: false, clockContent: '' })
-            .then(({ autoClock: onlineAutoClock, clockContent: onlineClockContent }) => {
+            .get({ autoClock: false, feeling: '' })
+            .then(({ autoClock: onlineAutoClock, feeling: onlineFeeling }) => {
                 setAutoClock(onlineAutoClock);
-                setClockContent(onlineClockContent);
+                setFeeling(onlineFeeling);
             });
     }, []);
 
     const handleToggle = React.useCallback((checked: boolean) => {
         onlineStorage.set({ autoClock: checked }).then(() => {
             setAutoClock(checked);
+            chrome.runtime.sendMessage({ from: 'options', action: `${checked ? 'enable' : 'disable'}-auto-clock` });
         });
     }, []);
 
     const handleChangeContent = React.useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const content = event.target.value;
-        setClockContent(content);
-        onlineStorage.set({ clockContent: content });
+        setFeeling(content);
+        onlineStorage.set({ feeling: content });
     }, []);
 
     return (
@@ -40,12 +41,7 @@ const AutoClock = () => {
                     <Switch checked={autoClock} onChange={handleToggle} />
                 </div>
                 <FormItem className="share-content-wrapper" label="分享内容">
-                    <TextArea
-                        className="share-content-input"
-                        rows={4}
-                        value={clockContent}
-                        onChange={handleChangeContent}
-                    />
+                    <TextArea className="share-content-input" rows={4} value={feeling} onChange={handleChangeContent} />
                 </FormItem>
             </PageLayout>
         </div>

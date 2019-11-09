@@ -7,7 +7,7 @@ const srcPath = resolve(__dirname, '../../src');
 const serverPath = encodeURIComponent(`http://${serverConfig.HOST}:${serverConfig.PORT}/__webpack_HMR__`);
 const HMRClientScript = `webpack-hot-middleware/client?path=${serverPath}&reload=true`;
 const entry = {
-    background: [HMRClientScript, resolve(srcPath, 'background.ts')],
+    background: [HMRClientScript, resolve(srcPath, 'background/index.ts')],
     options: ['react-hot-loader/patch', HMRClientScript, resolve(srcPath, `options/index.tsx`)],
 };
 
