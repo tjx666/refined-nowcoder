@@ -11,8 +11,7 @@
         "webRequestBlocking",
         "storage",
         "notifications",
-        "http://*/*",
-        "https://*/*"
+        "https://www.nowcoder.com/*"
     ],
     "content_security_policy": "script-src 'self' 'unsafe-eval' http://localhost:3000; object-src 'self';",
     "minimum_chrome_version": "68",
@@ -24,7 +23,7 @@
         {
             "matches": ["https://www.nowcoder.com/*"],
             "css": ["css/all.css"],
-            "js": ["js/all.js"]
+            "js": ["vendor/js/jquery.js", "js/all.js"]
         },
         {
             "matches": ["https://www.nowcoder.com/discuss*"],

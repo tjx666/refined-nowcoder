@@ -2,7 +2,6 @@ const { resolve } = require('path');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const entry = require('../utils/entry');
 
@@ -140,10 +139,6 @@ module.exports = {
             inject: 'body',
             minify: false,
         }),
-        new CopyPlugin([
-            { from: resolve(projectRoot, 'public'), ignore: ['*.html'] },
-            { from: resolve(projectRoot, 'src/manifest.json') },
-        ]),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
         }),

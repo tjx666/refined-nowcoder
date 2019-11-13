@@ -34,7 +34,7 @@ module.exports = function extensionAutoReload(compiler) {
                     );
                 }
             }
-        }, 1000);
+        }, 2000);
 
         // 断开链接后之前的 hook 就不要执行了
         const plugin = stats => !closed && callback(stats);

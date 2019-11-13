@@ -9,7 +9,7 @@
     "scripts": {
         "start": "node ./server",
         "devtools": "node ./server --devtools",
-        "build": "webpack --config ./server/configs/webpack.prod.js. --watch --progress  -p",
+        "build": "webpack --config ./server/configs/webpack.prod.js --watch --progress  -p",
         "lint": "lint-staged"
     },
     "dependencies": {

@@ -1,0 +1,53 @@
+{
+    "name": "Refined Nowcoder",
+    "version": "1.0",
+    "description": "牛客网 chrome 扩展",
+    "manifest_version": 2,
+    "permissions": [
+        "storage",
+        "declarativeContent",
+        "activeTab",
+        "webRequest",
+        "webRequestBlocking",
+        "storage",
+        "notifications",
+        "https://www.nowcoder.com/*"
+    ],
+    "content_security_policy": "script-src 'self' 'unsafe-eval' http://localhost:3000; object-src 'self';",
+    "minimum_chrome_version": "68",
+    "background": {
+        "scripts": ["js/background.js"],
+        "persistent": true
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://www.nowcoder.com/*"],
+            "css": ["css/all.css"],
+            "js": ["js/all.js"]
+        },
+        {
+            "matches": ["https://www.nowcoder.com/discuss*"],
+            "css": ["css/discuss.css"],
+            "js": ["js/discuss.js"]
+        }
+    ],
+    "browser_action": {
+        "default_icon": {
+            "16": "icons/get_started16.png",
+            "32": "icons/get_started32.png",
+            "48": "icons/get_started48.png",
+            "128": "icons/get_started128.png"
+        }
+    },
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": true
+    },
+    "icons": {
+        "16": "icons/get_started16.png",
+        "32": "icons/get_started32.png",
+        "48": "icons/get_started48.png",
+        "128": "icons/get_started128.png"
+    },
+    "web_accessible_resources": ["js/*", "images/*", "styles/*"]
+}
