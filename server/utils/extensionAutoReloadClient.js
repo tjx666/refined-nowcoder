@@ -1,6 +1,14 @@
 if (!window.__loaded_extensionAutoReloadPath__) {
     function extensionAutoReloadPatch() {
-        const source = new EventSource('http://localhost:3000/__extension_auto_reload_sse__');
+        let source;
+
+        try {
+            source = new EventSource('http://localhost:3000/__extension_auto_reload_sse__');
+        } catch (error) {
+            console.error(error);
+            console.error('请确认是否启动了 devServer');
+            return;
+        }
 
         source.addEventListener(
             'open',
