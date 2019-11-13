@@ -28,7 +28,7 @@
         "react-devtools": "^4.2.0",
         "react-dom": "^16.11.0",
         "react-router-dom": "^5.1.2",
-        "react-use": "^12.9.0"
+        "react-use": "^13.6.3"
     },
     "devDependencies": {
         "@babel/cli": "^7.6.4",
@@ -46,11 +46,12 @@
         "@types/react": "^16.9.11",
         "@types/react-dom": "^16.9.3",
         "@types/react-router-dom": "^5.1.0",
+        "@types/vfile-message": "^2.0.0",
         "@typescript-eslint/eslint-plugin": "^2.5.0",
         "@typescript-eslint/parser": "^2.5.0",
         "autoprefixer": "^9.7.0",
         "babel-loader": "^8.0.6",
-        "chalk": "^2.4.2",
+        "chalk": "^3.0.0",
         "clean-webpack-plugin": "^3.0.0",
         "copy-webpack-plugin": "^5.0.4",
         "core-js": "^3.3.6",

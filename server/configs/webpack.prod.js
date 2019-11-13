@@ -10,7 +10,7 @@ const devConfig = {
     plugins: [
         new CopyPlugin([
             { from: resolve(projectRoot, 'public'), ignore: ['*.html'] },
-            { from: resolve(projectRoot, 'src/manifest.prod.json') },
+            { from: resolve(projectRoot, 'src/manifest.prod.json'), to: 'manifest.json' },
         ]),
     ],
 };
