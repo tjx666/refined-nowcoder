@@ -23,7 +23,6 @@ export default async function blockPosts() {
                     excludeBlockRegexps.every(reg => !reg.test(title)) && blockRegexps.some(reg => reg.test(title));
 
                 if (shouldBlock) {
-                    console.log(title);
                     $(this).hide();
                     blockedPostsLis.push(this);
                     blockWishCount++;
