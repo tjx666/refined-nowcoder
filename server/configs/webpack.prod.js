@@ -1,5 +1,4 @@
 const { resolve } = require('path');
-const { HashedModuleIdsPlugin } = require('webpack');
 const merge = require('webpack-merge');
 const CopyPlugin = require('copy-webpack-plugin');
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
@@ -20,11 +19,6 @@ const prodConfig = merge.smart(common, {
             { from: resolve(projectRoot, 'public'), ignore: ['*.html'] },
             { from: resolve(projectRoot, 'src/manifest.prod.json'), to: 'manifest.json' },
         ]),
-        new HashedModuleIdsPlugin({
-            hashFunction: 'sha256',
-            hashDigest: 'hex',
-            hashDigestLength: 20,
-        }),
         new CompressionPlugin({
             test: /\.js$|\.css$|\.html$/,
             algorithm: 'gzip',
@@ -41,6 +35,11 @@ const prodConfig = merge.smart(common, {
                 parallel: true,
                 sourceMap: true,
                 extractComments: false,
+                terserOptions: {
+                    output: {
+                        comments: false,
+                    },
+                },
             }),
         ],
     },
