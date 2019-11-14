@@ -2,6 +2,16 @@
 
 chrome extension for [nowcoder](https://www.nowcoder.com)
 
+## :sparkles: Features
+
+- 屏蔽许愿贴和交友贴
+
+- 自动打卡
+
+- 双击返回顶部
+
+更多功能正在开发中...
+
 ## :dart: TODO
 
 - [ ] 新消息通知
