@@ -14,9 +14,9 @@ chrome extension for [nowcoder](https://www.nowcoder.com)
 
 ## :dart: TODO
 
-- [ ] 新消息通知
+- [ ] 新消息通知（notification）
 - [ ] 自定义屏蔽
-- [ ] 帖子详情页显示学校和学历
+- [ ] 帖子详情页显示学校和职业
 
 ## :hammer_and_wrench: Develop
 
@@ -51,7 +51,7 @@ npm start
 
 具体原理：
 
-> 给 webpack compiler 的 done 事件挂了个钩子，这个钩子的作用就是在没有编译出错并且修改的代码所在的模块的 entry 就是 content scripts 之一的情况下通过 SSE 推送消息给注入了 content scripts 的页面。所有的注入了 content scripts 页面也都注入了一个 ExtensionAutoReloadClient.js 的补丁，这个补丁获取到 SSE 的消息后会和 background.js 通信，让 background,js 去 reload 扩展，再过 200ms 后 reload 当前页面
+> 给 webpack compiler 的 done 事件挂了个钩子，这个钩子的作用就是在没有编译出错并且修改的代码所在的模块的 entry 就是 content scripts 之一的情况下通过 SSE 推送消息给注入了 content scripts 的页面。所有的注入了 content scripts 页面也都注入了一个 ExtensionAutoReload.js 的补丁，这个补丁获取到 SSE 的消息后会和 background.js 通信，让 background,js 去 reload 扩展，再过 200ms 后 reload 当前页面
 
 会其它页面如 options, popup, background 热更新都是正常的，包括 react 组件的局部刷新都配置好了。
 

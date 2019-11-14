@@ -16,7 +16,7 @@ if (argv.devtools) {
     const util = require('util');
     const exec = util.promisify(require('child_process').exec);
 
-    async function startupReactDevtools() {
+    (async function startupReactDevtools() {
         let output;
         try {
             output = await exec('npx react-devtools');
@@ -28,14 +28,11 @@ if (argv.devtools) {
         const { stdout, stderr } = output;
         console.log('stdout:', stdout);
         console.error('stderr:', stderr);
-    }
-    startupReactDevtools();
+    })();
 }
 
-const entryNames = fs.readdirSync(resolve(srcPath, 'contents'));
-entryNames.forEach(name => {
-    const contentScriptsAutoReloadPatch = resolve(__dirname, './extensionAutoReloadClient.js');
-    entry[name] = [contentScriptsAutoReloadPatch, resolve(srcPath, `contents/${name}/index.ts`)];
-});
+const contentScriptNames = fs.readdirSync(resolve(srcPath, 'contents'));
+// eslint-disable-next-line no-return-assign
+contentScriptNames.forEach(name => (entry[name] = resolve(srcPath, `contents/${name}/index.ts`)));
 
 module.exports = entry;
