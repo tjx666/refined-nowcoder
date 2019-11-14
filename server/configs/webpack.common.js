@@ -57,7 +57,7 @@ module.exports = {
                     {
                         loader: 'less-loader',
                         options: {
-                            // 使用 modifyVars 可以修改 antd 主题
+                            // use modifyVars to custom antd theme
                             modifyVars: {},
                             javascriptEnabled: true,
                         },
@@ -93,7 +93,6 @@ module.exports = {
                 ],
             },
             {
-                // 处理字体文件
                 test: /\.(ttf|woff|woff2|eot|otf)$/,
                 use: [
                     {
@@ -102,28 +101,6 @@ module.exports = {
                             name: '[name]-[contenthash].[ext]',
                             outputPath: 'fonts',
                         },
-                    },
-                ],
-            },
-            {
-                // 处理 csv/tsv
-                test: /\.(csv|tsv)$/,
-                use: [
-                    {
-                        loader: 'csv-loader',
-                        options: {
-                            dynamicTyping: true,
-                            header: true,
-                            skipEmptyLines: true,
-                        },
-                    },
-                ],
-            },
-            {
-                test: /\.xml$/,
-                use: [
-                    {
-                        loader: 'xml-loader',
                     },
                 ],
             },

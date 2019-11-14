@@ -7,7 +7,7 @@ const common = require('./webpack.common');
 
 const projectRoot = resolve(__dirname, '../../');
 
-const devConfig = {
+module.exports = merge.smart(common, {
     mode: 'development',
     devtool: 'eval-source-map',
     plugins: [
@@ -19,6 +19,4 @@ const devConfig = {
             { from: resolve(projectRoot, 'src/manifest.dev.json'), to: 'manifest.json' },
         ]),
     ],
-};
-
-module.exports = merge.smart(common, devConfig);
+});
