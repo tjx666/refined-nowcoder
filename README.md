@@ -31,19 +31,19 @@ npm install
 
 ### 3. 启动项目
 
-webpack 热更新的问题花了我挺多精力，目前基本上完美解决了 chrome 扩展的各种页面的热更新问题。
+```bash
+npm start
+```
 
-不过 content scripts 没法局部刷新，根本原因是因为 webpack 采用的是 jsonp 拉取更新补丁，而更新补丁那个 js 文件由于 chrome 限制，是文法访问 content script 脚本中的 `webpackHotUpdate` 函数的，所以 content scripts 无法做到热更新。优雅降级处理，我做到了如果你修改了 content scripts 的代码，会先自动 reload 扩展，再自动刷新页面。
+其实 webpack 热更新的问题花了我挺多精力，目前基本上完美解决了 chrome 扩展的各种页面的热更新问题。
+
+不过 content scripts 还是没法局部刷新，根本原因是因为 webpack 采用的是 jsonp 拉取更新补丁，而更新补丁那个 js 文件由于 chrome 限制，是文法访问 content script 脚本中的 `webpackHotUpdate` 函数的，所以 content scripts 无法做到热更新。优雅降级处理，我做到了如果你修改了 content scripts 的代码，会先自动 reload 扩展，再自动刷新页面。
 
 具体原理：
 
 > 给 webpack compiler 的 done 事件挂了个钩子，这个钩子的作用就是在没有编译出错并且修改的代码所在的模块的 entry 就是 content scripts 之一的情况下通过 SSE 推送消息给注入了 content scripts 的页面。所有的注入了 content scripts 页面也都注入了一个 ExtensionAutoReloadClient.js 的补丁，这个补丁获取到 SSE 的消息后会和 background.js 通信，让 background,js 去 reload 扩展，再过 200ms 后 reload 当前页面
 
-会其它页面如 options, popup, background 热更新都是正常的，包括 react 组件的局部刷新都配置好了。启动项目直接使用：
-
-```bash
-npm start
-```
+会其它页面如 options, popup, background 热更新都是正常的，包括 react 组件的局部刷新都配置好了。
 
 ### 4. 安装扩展
 
