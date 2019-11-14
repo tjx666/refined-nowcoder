@@ -27,6 +27,7 @@ export default function() {
             const clockURL = 'https://www.nowcoder.com/clock/new';
             let res: any;
             try {
+                // feeling 表示的是打卡分的享内容, circle 是分享到哪些圈子，-1 表示不分享到圈子
                 res = await axios.post(
                     clockURL,
                     { feeling, circle: -1 },

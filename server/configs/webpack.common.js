@@ -3,7 +3,6 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const entry = require('../utils/entry');
 
@@ -129,7 +128,6 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
         }),
-        new HardSourceWebpackPlugin(),
         new ForkTsCheckerWebpackPlugin({ memoryLimit: 1024 }),
     ],
     resolve: {

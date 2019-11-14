@@ -5,6 +5,8 @@ const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+// FIXME: HardSourceWebpackPlugin has a bug "can not freeze node_modules/.../lib" in development, so, now can only be used in production
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const common = require('./webpack.common');
 
 const projectRoot = resolve(__dirname, '../../');
@@ -26,6 +28,7 @@ const prodConfig = merge.smart(common, {
             threshold: 10240,
             minRatio: 0.8,
         }),
+        new HardSourceWebpackPlugin({ info: { level: 'error' } }),
     ],
     optimization: {
         minimize: true,
