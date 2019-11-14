@@ -3,6 +3,7 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const entry = require('../utils/entry');
 
 const projectRoot = resolve(__dirname, '../../');
@@ -23,7 +24,12 @@ module.exports = {
         rules: [
             {
                 test: /\.(ts|js)x?$/,
-                loader: 'babel-loader',
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        cacheDirectory: true,
+                    },
+                },
                 exclude: /node_modules/,
             },
             {
@@ -119,6 +125,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
         }),
+        new HardSourceWebpackPlugin(),
     ],
     resolve: {
         alias: {
