@@ -4,13 +4,21 @@ chrome extension for [nowcoder](https://www.nowcoder.com)
 
 ## :sparkles: Features
 
-- 屏蔽许愿贴和交友贴
+- 屏蔽许愿贴和交友贴 :no_entry_sign:
 
-- 自动打卡
+- 自动打卡 :clock12:
 
-- 双击返回顶部
+- 双击返回顶部 :arrow_up:
 
 更多功能正在开发中...
+
+## :package: Installation
+
+由于 chrome 应用商店发布应用之前需要先使用信用卡支付注册费，我的信用卡还没申请下来，预计这两周就能拿到卡并上架该扩展。如需提前体验可以下载[体验版](https://github.com/tjx666/refined-nowcoder/releases/download/v0.0.1/dist.zip)到本地，使用开发者模式加载已解压的的扩展。具体方法：
+
+进入到 `chrome://extensions` 扩展管理页面，点击右上角开关打开`开发者模式`，再点击左侧`加载已解压的扩展程序`按钮，选择下载并解压后的体验版扩展，这样扩展就安装完成了。
+
+![load local chrome extension](https://i.loli.net/2019/11/15/ODQP5vUWCxLaFfR.png)
 
 ## :dart: TODO
 
@@ -57,9 +65,7 @@ npm start
 
 ### 4. 安装扩展
 
-进入到 `chrome://extensions` 扩展管理页面，点击右上角打开开发者模式，再点击加载已解压的扩展程序，选择项目中的 `dist` 文件夹，这样扩展就安装完成了。
-
-![load local chrome extension](https://i.loli.net/2019/11/03/IExHN7Pu5FUwYqD.png)
+参考 [installation](https://github.com/tjx666/refined-nowcoder#package) 部分，注意扩展最后会打包到项目根目录下的 `dist` 文件夹中。
 
 ### 5. 调试 react 项目
 
@@ -91,7 +97,7 @@ npm run devtools
 
 `2019-11-04`
 
-- 新增选项与帮助页面
+新增选项与帮助页面
 
 ## :link: Reference
 
@@ -101,3 +107,7 @@ npm run devtools
 4. [chrome-extension-book](https://lightningminers.gitbook.io/chrome-extension-book/)
 5. [refined-github](https://github.com/sindresorhus/refined-github/)
 6. [v2ex-plus](https://github.com/sciooga/v2ex-plus)
+
+## :handshake: Contributing [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+非常欢迎提出你的宝贵意见和 pull request。
