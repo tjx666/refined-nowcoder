@@ -65,7 +65,7 @@ npm start
 
 ### 4. 安装扩展
 
-参考 [installation](https://github.com/tjx666/refined-nowcoder#package) 部分，注意扩展最后会打包到项目根目录下的 `dist` 文件夹中。
+参考 [installation](https://github.com/tjx666/refined-nowcoder#package-installation) 部分，注意扩展最后会打包到项目根目录下的 `dist` 文件夹中。
 
 ### 5. 调试 react 项目
 
