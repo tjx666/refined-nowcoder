@@ -26,9 +26,14 @@
             "js": ["js/all.js"]
         },
         {
-            "matches": ["https://www.nowcoder.com/discuss*"],
+            "matches": ["https://www.nowcoder.com/discuss", "https://www.nowcoder.com/discuss?*"],
             "css": ["css/discuss.css"],
             "js": ["js/discuss.js"]
+        },
+        {
+            "matches": ["https://www.nowcoder.com/discuss/*/?*"],
+            "css": ["css/detail.css"],
+            "js": ["js/detail.js"]
         }
     ],
     "browser_action": {

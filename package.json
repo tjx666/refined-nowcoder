@@ -7,9 +7,9 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "start": "node ./server",
-        "devtools": "node ./server --devtools",
-        "build": "webpack --config ./server/configs/webpack.prod.js --progress",
+        "start": "cross-env NODE_ENV=development node ./server",
+        "devtools": "npm start -- --devtools",
+        "build": "cross-env NODE_ENV=production webpack --config ./server/configs/webpack.prod.js --progress",
         "lint": "lint-staged",
         "clean": "rimraf ./dist -rf",
         "reinstall": "rimraf ./node_modules && yarn"

@@ -6,10 +6,19 @@ const serverConfig = require('../configs/server');
 const srcPath = resolve(__dirname, '../../src');
 const serverPath = encodeURIComponent(`http://${serverConfig.HOST}:${serverConfig.PORT}/__webpack_HMR__`);
 const HMRClientScript = `webpack-hot-middleware/client?path=${serverPath}&reload=true`;
-const entry = {
+
+const devEntry = {
     background: [HMRClientScript, resolve(srcPath, 'background/index.ts')],
     options: ['react-hot-loader/patch', HMRClientScript, resolve(srcPath, `options/index.tsx`)],
 };
+
+const prodEntry = {
+    background: [resolve(srcPath, 'background/index.ts')],
+    options: [resolve(srcPath, `options/index.tsx`)],
+};
+
+const isProd = process.env.NODE_ENV === 'production';
+const entry = isProd ? prodEntry : devEntry;
 
 if (argv.devtools) {
     entry.options.unshift('react-devtools');
@@ -32,7 +41,8 @@ if (argv.devtools) {
 }
 
 const contentScriptNames = fs.readdirSync(resolve(srcPath, 'contents'));
-// eslint-disable-next-line no-return-assign
-contentScriptNames.forEach(name => (entry[name] = resolve(srcPath, `contents/${name}/index.ts`)));
+contentScriptNames.forEach(name => {
+    entry[name] = resolve(srcPath, `contents/${name}/index.ts`);
+});
 
 module.exports = entry;
