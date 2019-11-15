@@ -44,6 +44,7 @@
         "no-param-reassign": "off",
         "no-underscore-dangle": "off",
         "no-inner-declarations": "off",
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "prefer-template": "off"
     }
 }

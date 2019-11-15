@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { onlineStorage } from 'utils/storage';
+import notification from 'utils/notification';
 
 // 自动打卡
 // !: 打卡出错只弹一次通知
@@ -37,34 +38,17 @@ export default function() {
                     }
                 );
             } catch (err) {
-                !autoClockFailed &&
-                    chrome.notifications.create({
-                        type: 'basic',
-                        title: '牛客网自动打卡失败！',
-                        iconUrl: 'icons/get_started48.png',
-                        message: `可能是网络出错或者牛客服务器异常`,
-                    });
+                !autoClockFailed && notification('牛客网自动打卡失败！', `可能是网络出错或者牛客服务器异常`);
                 onlineStorage.set({ autoClockFailed: true });
                 return;
             }
 
             const { code } = res.data;
             if (code === 0) {
-                chrome.notifications.create({
-                    type: 'basic',
-                    title: '牛客网自动打卡成功！',
-                    iconUrl: 'icons/get_started48.png',
-                    message: `打卡内容：${feeling}！`,
-                });
+                notification('牛客网自动打卡成功！', `打卡内容：${feeling ? feeling + '!' : ''}`);
             } else if (code === 999) {
                 // 999: 未登入
-                !autoClockFailed &&
-                    chrome.notifications.create({
-                        type: 'basic',
-                        title: '牛客网自动打卡失败！',
-                        iconUrl: 'icons/get_started48.png',
-                        message: `您尚未登入牛客！`,
-                    });
+                !autoClockFailed && notification('牛客网自动打卡失败！', `您尚未登入牛客！`);
                 onlineStorage.set({ autoClockFailed: true });
                 return;
             } else if (code === 1) {
