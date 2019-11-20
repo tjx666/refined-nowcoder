@@ -2,9 +2,9 @@ const chromeSyncStorage = chrome.storage.sync;
 // const chromeLocalStorage = chrome.storage.local;
 
 const onlineStorage = {
-    get<T extends Object>(keys: T): Promise<T> {
+    get<T extends Object>(keys: T): Promise<Record<keyof T, any>> {
         return new Promise(resolve => {
-            chromeSyncStorage.get(keys, items => resolve(items as T));
+            chromeSyncStorage.get(keys, items => resolve(items as Record<keyof T, any>));
         });
     },
     set(keys: Object) {
