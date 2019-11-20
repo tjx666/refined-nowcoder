@@ -1,0 +1,20 @@
+@import '~styles/options.scss';
+
+.block-post {
+    &-content {
+        margin-top: 20px;
+
+        .custom-rules-container {
+            margin-left: 20px;
+            padding-bottom: 20px;
+
+            .question-icon {
+                color: $primary-color;
+            }
+
+            .custom-rules-textarea {
+                width: 600px;
+            }
+        }
+    }
+}

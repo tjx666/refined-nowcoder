@@ -34,17 +34,15 @@ const AutoClock = () => {
     }, []);
 
     return (
-        <div className="auto-clock">
-            <PageLayout title="设置自动打卡" backTo="/">
-                <div className="switch-wrapper">
-                    <span>是否开启自动打卡</span>
-                    <Switch checked={autoClock} onChange={handleToggle} />
-                </div>
-                <FormItem className="share-content-wrapper" label="分享内容">
-                    <TextArea className="share-content-input" rows={4} value={feeling} onChange={handleChangeContent} />
-                </FormItem>
-            </PageLayout>
-        </div>
+        <PageLayout className="auto-clock" title="设置自动打卡" backTo="/">
+            <div className="switch-wrapper">
+                <span>是否开启自动打卡</span>
+                <Switch checked={autoClock} onChange={handleToggle} />
+            </div>
+            <FormItem className="share-content-wrapper" label="分享内容">
+                <TextArea className="share-content-input" rows={4} value={feeling} onChange={handleChangeContent} />
+            </FormItem>
+        </PageLayout>
     );
 };
 

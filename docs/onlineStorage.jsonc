@@ -5,4 +5,5 @@
     "feeling": "", // 打开内容
     "lastClockDate": "", // 上次打卡日期
     "autoClockFailed": false, // 自动打卡失败
+    "blockPostRegexps": "" // 用户自定义屏蔽正则表达式
 }

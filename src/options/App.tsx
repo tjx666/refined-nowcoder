@@ -1,7 +1,7 @@
 import { hot } from 'react-hot-loader/root';
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Home, AutoClock } from './pages';
+import { Home, AutoClock, BlockPost } from './pages';
 import './App.scss';
 
 const App = () => {
@@ -24,6 +24,9 @@ const App = () => {
                         </Route>
                         <Route path="/autoClock">
                             <AutoClock />
+                        </Route>
+                        <Route path="/blockPost">
+                            <BlockPost />
                         </Route>
                     </Switch>
                 </main>

@@ -22,9 +22,9 @@ chrome extension for [nowcoder](https://www.nowcoder.com)
 
 ## :dart: TODO
 
-- [ ] 新消息通知（notification）
 - [ ] 自定义屏蔽
 - [ ] 帖子详情页显示学校和职业
+- [ ] 新消息通知（notification）
 
 ## :hammer_and_wrench: Develop
 

@@ -4,12 +4,14 @@ import { Icon } from 'antd';
 import './style.scss';
 
 interface PageLayoutProps {
+    className?: string;
+    contentClasses?: string;
     title: string;
     backTo: string;
     children: React.ReactNode;
 }
 
-const PageLayout = ({ title, backTo, children }: PageLayoutProps) => {
+const PageLayout = ({ className = '', contentClasses = '', title, backTo, children }: PageLayoutProps) => {
     const backToArrow = React.useMemo(() => {
         return (
             backTo && (
@@ -21,12 +23,12 @@ const PageLayout = ({ title, backTo, children }: PageLayoutProps) => {
     }, [backTo]);
 
     return (
-        <div className="page-layout">
+        <div className={`page-layout ${className}`}>
             <div className="top">
                 {backToArrow}
                 {title}
             </div>
-            {children}
+            <div className={`page-layout-content ${contentClasses}`}>{children}</div>
         </div>
     );
 };

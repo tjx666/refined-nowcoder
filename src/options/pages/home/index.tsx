@@ -37,23 +37,12 @@ const Home = () => {
         <div className="home">
             <SettingCard title="通用">
                 <SettingRow
-                    label="屏蔽许愿贴"
-                    extraType="switch"
-                    checked={settings.blockWish}
-                    onChange={getSettingsChangeHandler('blockWish')}
-                />
-                <SettingRow
-                    label="屏蔽交友贴"
-                    extraType="switch"
-                    checked={settings.blockMakeFriends}
-                    onChange={getSettingsChangeHandler('blockMakeFriends')}
-                />
-                <SettingRow
                     label="双击返回顶部"
                     extraType="switch"
                     checked={settings.doubleClickBackToTop}
                     onChange={getSettingsChangeHandler('doubleClickBackToTop')}
                 />
+                <SettingRow label="屏蔽设置" extraType="link" to="/blockPost" />
                 <SettingRow label="自动打卡" extraType="link" to="/autoClock" />
             </SettingCard>
         </div>

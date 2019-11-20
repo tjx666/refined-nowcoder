@@ -135,6 +135,7 @@ module.exports = {
             'react-dom': '@hot-loader/react-dom',
             '@': resolve(projectRoot, 'src'),
             utils: resolve(projectRoot, 'src/utils'),
+            styles: resolve(projectRoot, 'src/styles'),
         },
         extensions: ['.ts', '.tsx', '.js', '.json'],
     },

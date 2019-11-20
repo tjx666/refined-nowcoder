@@ -11,7 +11,7 @@
         "devtools": "npm start -- --devtools",
         "build": "cross-env NODE_ENV=production webpack --config ./server/configs/webpack.prod.js --progress",
         "lint": "lint-staged",
-        "clean": "rimraf ./dist -rf",
+        "clean": "rimraf -rf ./dist",
         "reinstall": "rimraf ./node_modules && yarn"
     },
     "dependencies": {
