@@ -1,7 +1,10 @@
 /* eslint-disable prefer-template */
+import * as React from 'react';
+import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import _ from 'lodash';
 import { onlineStorage } from 'utils/storage';
-import notification from 'utils/notification';
+import { BlockInfos } from './components';
 
 // 屏蔽帖子
 export default async function blockPosts() {
@@ -76,34 +79,21 @@ export default async function blockPosts() {
     });
 
     if (blockedPostsLis.length > 0) {
-        const blockInfosInnerHTML = `共屏蔽 ${blockedPostsLis.length} 条帖子，
-        ${blockWishCount !== 0 ? blockWishCount + '条许愿贴&nbsp;' : ''}
-        ${blockMakeFriendsCount !== 0 ? blockMakeFriendsCount + '交友贴&nbsp;' : ''}
-        ${blockByCustomRulesCount !== 0 ? blockByCustomRulesCount + '条被自定义屏蔽&nbsp;' : ''}
-        <span class="show-block-posts-switch">显示</span>`;
-
-        const blockInfosElement = document.createElement('p');
-        blockInfosElement.innerHTML = blockInfosInnerHTML;
-        $('.nk-container .nk-main .nk-content').append(blockInfosElement);
-        $(blockInfosElement).addClass('block-post-infos');
-
-        let blocked = true;
-        $('.show-block-posts-switch').click(function() {
-            if (blocked) {
-                const $postsContainer = $('.nk-content .module-body .common-list');
-                blockedPostsLis.forEach(blockPostLi => {
-                    $postsContainer.append(blockPostLi);
-                    $(blockPostLi).show('fast');
-                });
-                blocked = false;
-                $(this).text('屏蔽');
-            } else {
-                blockedPostsLis.forEach(blockPostLi => {
-                    $(blockPostLi).hide('fast');
-                });
-                blocked = true;
-                $(this).text('显示');
-            }
+        const $postsContainer = $('.nk-content .module-body .common-list');
+        $(blockedPostsLis).each(function() {
+            $postsContainer.append(this);
         });
+
+        const infosRoot = document.createElement('div');
+        $('.nk-container .nk-main .nk-content').append(infosRoot);
+        ReactDOM.render(
+            <BlockInfos
+                blockedPostsLis={blockedPostsLis}
+                blockWishCount={blockWishCount}
+                blockMakeFriendsCount={blockMakeFriendsCount}
+                blockByCustomRulesCount={blockByCustomRulesCount}
+            />,
+            infosRoot
+        );
     }
 }

@@ -42,7 +42,8 @@ if (argv.devtools) {
 
 const contentScriptNames = fs.readdirSync(resolve(srcPath, 'contents'));
 contentScriptNames.forEach(name => {
-    entry[name] = resolve(srcPath, `contents/${name}/index.ts`);
+    const existsTsxIndex = fs.existsSync(resolve(srcPath, `contents/${name}/index.tsx`));
+    entry[name] = resolve(srcPath, `contents/${name}/index.${existsTsxIndex ? 'tsx' : 'ts'}`);
 });
 
 module.exports = entry;

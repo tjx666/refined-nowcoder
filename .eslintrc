@@ -32,6 +32,7 @@
         "react/jsx-filename-extension": "off",
         "react/jsx-indent": "off",
         "react/jsx-indent-props": ["error", 4],
+        "react/jsx-one-expression-per-line": "off",
         "jsx-a11y/label-has-associated-control": "off",
         "prettier/prettier": "off",
         "import/prefer-default-export": "off",
@@ -44,7 +45,6 @@
         "no-param-reassign": "off",
         "no-underscore-dangle": "off",
         "no-inner-declarations": "off",
-        "no-plusplus": "off",
-        "prefer-template": "off"
+        "no-plusplus": "off"
     }
 }
