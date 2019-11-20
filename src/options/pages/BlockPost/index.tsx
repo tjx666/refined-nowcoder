@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Input, Form, Icon, Tooltip } from 'antd';
 import { onlineStorage } from 'utils/storage';
+import { isValidRegexp } from 'utils/regexp';
 import { PageLayout } from '../../components';
 import SettingRow from '../../components/SettingCard/SettingRow';
 import './style.scss';
@@ -21,36 +22,48 @@ const BlockPost = () => {
         blockPostRegexps: '',
     });
 
-    const syncOnlineSetting = async () => {
-        const onlineBlockSettings = await onlineStorage.get({
-            blockWish: false,
-            blockMakeFriends: false,
-            blockPostRegexps: '',
+    const [errorRegexpStr, setErrorRegexpStr] = React.useState<string>('');
+
+    const updateErrorRegexp = (blockPostRegexps: string) => {
+        const regexpStrArray = blockPostRegexps.split('\n').map(regexp => regexp.trim());
+        const newErrorRegexpStr = regexpStrArray.find(regexpStr => {
+            return !isValidRegexp(regexpStr);
         });
-        setBlockSettings(onlineBlockSettings);
+        setErrorRegexpStr(newErrorRegexpStr || '');
     };
 
     React.useEffect(() => {
+        const syncOnlineSetting = async () => {
+            const onlineBlockSettings = await onlineStorage.get({
+                blockWish: false,
+                blockMakeFriends: false,
+                blockPostRegexps: '',
+            });
+            setBlockSettings(onlineBlockSettings);
+            updateErrorRegexp(onlineBlockSettings.blockPostRegexps);
+        };
+
         syncOnlineSetting();
     }, []);
 
     const getSettingChangeHandler = (key: keyof BlockSetting) => {
-        return (checked: boolean, event: MouseEvent) => {
+        return (checked: boolean) => {
             setBlockSettings({ ...blockSettings, [key]: checked });
             onlineStorage.set({ [key]: checked });
         };
     };
 
     const handleChangeRules = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const regexps = event.target.value.split('\n').map(regexp => regexp.trim());
-        setBlockSettings({ ...blockSettings, blockPostRegexps: event.target.value });
-        onlineStorage.set({ blockPostRegexps: regexps.join('\n') });
+        const newBlockPostRegexps = event.target.value;
+        updateErrorRegexp(newBlockPostRegexps);
+        setBlockSettings({ ...blockSettings, blockPostRegexps: newBlockPostRegexps });
+        onlineStorage.set({ blockPostRegexps: newBlockPostRegexps });
     };
 
     const customRulesLabel = (
         <span>
             自定义规则：
-            <Tooltip title="每一行字符串表示用于匹配需要屏蔽的帖子的标题的正则表达式">
+            <Tooltip title="每一行都是一规则，每个规则就是一个正则表达式，当一个帖子标题匹配任意一个规则时将被屏蔽">
                 <Icon className="question-icon" type="question-circle" theme="filled" />
             </Tooltip>
         </span>
@@ -77,6 +90,12 @@ const BlockPost = () => {
                     value={blockSettings.blockPostRegexps}
                     onChange={handleChangeRules}
                 />
+                {errorRegexpStr && (
+                    <p className="error-message">
+                        不合法的规则：
+                        {errorRegexpStr}
+                    </p>
+                )}
             </FormItem>
         </PageLayout>
     );
