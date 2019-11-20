@@ -22,7 +22,7 @@ chrome extension for [nowcoder](https://www.nowcoder.com)
 
 ## :dart: TODO
 
-- [ ] 自定义屏蔽
+- [x] 自定义屏蔽
 - [ ] 帖子详情页显示学校和职业
 - [ ] 新消息通知（notification）
 
@@ -82,6 +82,10 @@ npm run devtools
 ![react-devtools](https://i.loli.net/2019/11/04/ujo8gBKqydxOpW9.png)
 
 ## :pencil: Changelog
+
+`2019-11-20`
+
+支持自定义屏蔽
 
 `2019-11-13`
 
