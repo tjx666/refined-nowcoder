@@ -6,10 +6,10 @@
     },
     "extends": [
         "airbnb",
-        "plugin:prettier/recommended",
         "plugin:import/errors",
         "plugin:import/warnings",
-        "plugin:import/typescript"
+        "plugin:import/typescript",
+        "plugin:prettier/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -27,6 +27,9 @@
     "settings": {
         "import/parsers": {
             "@typescript-eslint/parser": [".ts", ".tsx", ".js", ".jsx", ".json"]
+        },
+        "import/resolver": {
+            "typescript": {}
         }
     },
     "rules": {

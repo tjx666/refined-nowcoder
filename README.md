@@ -1,10 +1,10 @@
 # refined-nowcoder
 
-chrome extension for [nowcoder](https://www.nowcoder.com)
+[牛客网](https://www.nowcoder.com) chrome 扩展
 
 ## :sparkles: Features
 
-- :no_entry_sign: 屏蔽许愿贴和交友贴
+- :no_entry_sign: 屏蔽许愿贴和交友贴，支持自定义屏蔽
 
 - :clock12: 自动打卡
 
@@ -19,12 +19,6 @@ chrome extension for [nowcoder](https://www.nowcoder.com)
 进入到 `chrome://extensions` 扩展管理页面，点击右上角开关打开`开发者模式`，再点击左侧`加载已解压的扩展程序`按钮，选择下载并解压后的体验版扩展，这样扩展就安装完成了。
 
 ![load local chrome extension](https://i.loli.net/2019/11/15/ODQP5vUWCxLaFfR.png)
-
-## :dart: TODO
-
-- [x] 自定义屏蔽
-- [ ] 帖子详情页显示学校和职业
-- [ ] 新消息通知（notification）
 
 ## :hammer_and_wrench: Develop
 

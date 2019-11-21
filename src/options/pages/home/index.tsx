@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { onlineStorage } from 'utils/storage.ts';
+import { onlineStorage } from 'utils/storage';
 import { SettingCard } from '../../components';
 
 const { SettingRow } = SettingCard;
@@ -36,14 +36,14 @@ const Home = () => {
     return (
         <div className="home">
             <SettingCard title="通用">
+                <SettingRow label="屏蔽设置" extraType="link" to="/blockPost" />
+                <SettingRow label="自动打卡" extraType="link" to="/autoClock" />
                 <SettingRow
                     label="双击返回顶部"
                     extraType="switch"
                     checked={settings.doubleClickBackToTop}
                     onChange={getSettingsChangeHandler('doubleClickBackToTop')}
                 />
-                <SettingRow label="屏蔽设置" extraType="link" to="/blockPost" />
-                <SettingRow label="自动打卡" extraType="link" to="/autoClock" />
             </SettingCard>
         </div>
     );
