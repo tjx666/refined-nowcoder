@@ -22,16 +22,20 @@ export default async function blockPosts() {
     let blockByCustomRulesCount = 0;
     const blockedPostsLis: HTMLElement[] = [];
     $postsLis.each(function() {
-        const links = $(this).find('.discuss-main a');
-        if (links.length >= 1) {
-            const title = links[0]!.textContent!;
+        const $links = $(this).find('.discuss-main a');
+        if ($links.length >= 1) {
+            const title = $links[0]!.textContent!;
+            const tags = [...$links.slice(1)].map(tagLink => {
+                return tagLink.textContent!.trim();
+            });
 
             // 屏蔽许愿贴
             if (blockWish) {
                 const blockRegexps = [/许愿/, /祈愿/];
                 const excludeBlockRegexps = [/还愿/];
                 const shouldBlock =
-                    excludeBlockRegexps.every(reg => !reg.test(title)) && blockRegexps.some(reg => reg.test(title));
+                    excludeBlockRegexps.every(reg => !reg.test(title)) &&
+                    (tags.includes('许愿') || blockRegexps.some(reg => reg.test(title)));
 
                 if (shouldBlock) {
                     $(this).hide();
@@ -46,7 +50,8 @@ export default async function blockPosts() {
                 const blockRegexps = [/找.{1,2}友/, /征.{1,2}友/];
                 const excludeBlockRegexps: RegExp[] = [];
                 const shouldBlock =
-                    excludeBlockRegexps.every(reg => !reg.test(title)) && blockRegexps.some(reg => reg.test(title));
+                    excludeBlockRegexps.every(reg => !reg.test(title)) &&
+                    (tags.includes('交友') || blockRegexps.some(reg => reg.test(title)));
 
                 if (shouldBlock) {
                     $(this).hide();
