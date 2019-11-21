@@ -4,7 +4,13 @@
         "es6": true,
         "webextensions": true
     },
-    "extends": ["airbnb", "plugin:prettier/recommended"],
+    "extends": [
+        "airbnb",
+        "plugin:prettier/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript"
+    ],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -14,34 +20,35 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 2018,
+        "ecmaVersion": 2019,
         "sourceType": "module"
     },
-    "plugins": ["react", "@typescript-eslint", "react-hooks", "import"],
+    "plugins": ["@typescript-eslint", "import", "react", "react-hooks"],
     "settings": {
         "import/parsers": {
-            "@typescript-eslint/parser": [".ts", ".tsx"]
-        },
-        "import/resolver": {
-            "typescript": {}
+            "@typescript-eslint/parser": [".ts", ".tsx", ".js", ".jsx", ".json"]
         }
     },
     "rules": {
+        "prettier/prettier": "off",
+        "jsx-a11y/label-has-associated-control": "off",
+
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
+
         "react/jsx-filename-extension": "off",
         "react/jsx-indent": "off",
         "react/jsx-indent-props": ["error", 4],
         "react/jsx-one-expression-per-line": "off",
-        "jsx-a11y/label-has-associated-control": "off",
-        "prettier/prettier": "off",
+
+        "import/no-extraneous-dependencies": "off",
         "import/prefer-default-export": "off",
+
         "no-unused-expressions": "off",
         "no-console": "off",
         "func-names": "off",
         "no-unused-vars": "off",
         "global-require": "off",
-        "import/no-extraneous-dependencies": "off",
         "no-param-reassign": "off",
         "no-underscore-dangle": "off",
         "no-inner-declarations": "off",
