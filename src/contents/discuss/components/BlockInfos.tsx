@@ -34,9 +34,9 @@ const BlockInfos = ({
     return (
         <p className="block-post-infos">
             <span>共屏蔽 {blockedPostsLis.length} 条帖子，</span>
-            {blockWishCount > 0 && <span>{blockWishCount} 条许愿贴</span>}
-            {blockMakeFriendsCount > 0 && <span>{blockMakeFriendsCount}条交友贴</span>}
-            {blockMakeFriendsCount > 0 && <span>{blockByCustomRulesCount}条被自定义规则屏蔽</span>}
+            {blockWishCount > 0 && <span>{blockWishCount} 条许愿贴，</span>}
+            {blockMakeFriendsCount > 0 && <span>{blockMakeFriendsCount}条交友贴，</span>}
+            {blockByCustomRulesCount > 0 && <span>{blockByCustomRulesCount}条被自定义规则屏蔽</span>}
             &nbsp;
             <span className="show-block-posts-switch" onClick={handleToggle}>
                 {showBlockedLis ? '屏蔽' : '展示'}

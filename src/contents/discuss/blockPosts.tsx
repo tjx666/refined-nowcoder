@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import _ from 'lodash';
 import { onlineStorage } from 'utils/storage';
+import { isValidRegexp } from 'utils/regexp';
 import { BlockInfos } from './components';
 
 // 屏蔽帖子
@@ -59,16 +60,9 @@ export default async function blockPosts() {
             if (typeof blockPostRegexps === 'string' && blockPostRegexps.trim() !== '') {
                 const blockRegexps = blockPostRegexps.split('\n');
                 const shouldBlock = blockRegexps.some(regStr => {
-                    let regexp: RegExp | undefined;
-                    try {
-                        regexp = new RegExp(regStr);
-                    } catch (err) {
-                        console.error(`不合法的正则表达式：${regStr}`);
-                        return false;
-                    }
-
-                    return regexp.test(title);
+                    return isValidRegexp(regStr) && new RegExp(regStr).test(title);
                 });
+
                 if (shouldBlock) {
                     $(this).hide();
                     blockedPostsLis.push(this);
