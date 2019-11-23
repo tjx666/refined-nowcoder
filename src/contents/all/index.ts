@@ -6,4 +6,4 @@ import './style.scss';
 onlineStorage.set({ cookies: document.cookie });
 
 // SSE client
-extensionAutoReload();
+process.env.NODE_ENV === 'development' && extensionAutoReload();

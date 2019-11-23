@@ -18,7 +18,7 @@ const prodConfig = merge.smart(common, {
     plugins: [
         new BundleAnalyzerPlugin(),
         new CopyPlugin([
-            { from: resolve(projectRoot, 'public'), ignore: ['*.html'] },
+            { from: resolve(projectRoot, 'public'), ignore: ['*.html', '**/vendor/**'] },
             { from: resolve(projectRoot, 'src/manifest.prod.json'), to: 'manifest.json' },
         ]),
         new CompressionPlugin({
