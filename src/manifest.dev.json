@@ -6,9 +6,7 @@
     "permissions": [
         "storage",
         "declarativeContent",
-        "activeTab",
         "webRequest",
-        "webRequestBlocking",
         "storage",
         "notifications",
         "https://www.nowcoder.com/*"
@@ -29,11 +27,6 @@
             "matches": ["https://www.nowcoder.com/discuss", "https://www.nowcoder.com/discuss?*"],
             "css": ["css/discuss.css"],
             "js": ["js/discuss.js"]
-        },
-        {
-            "matches": ["https://www.nowcoder.com/discuss/*/?*"],
-            "css": ["css/detail.css"],
-            "js": ["js/detail.js"]
         }
     ],
     "browser_action": {
@@ -53,6 +46,5 @@
         "32": "icons/get_started32.png",
         "48": "icons/get_started48.png",
         "128": "icons/get_started128.png"
-    },
-    "web_accessible_resources": ["js/*", "images/*", "styles/*"]
+    }
 }

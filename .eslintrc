@@ -2,15 +2,10 @@
     "env": {
         "browser": true,
         "es6": true,
+        "node": true,
         "webextensions": true
     },
-    "extends": [
-        "airbnb",
-        "plugin:import/errors",
-        "plugin:import/warnings",
-        "plugin:import/typescript",
-        "plugin:prettier/recommended"
-    ],
+    "extends": ["airbnb", "airbnb/hooks", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -20,41 +15,33 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 2019,
+        "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": ["@typescript-eslint", "import", "react", "react-hooks"],
+    "plugins": ["@typescript-eslint", "react"],
     "settings": {
-        "import/parsers": {
-            "@typescript-eslint/parser": [".ts", ".tsx", ".js", ".jsx", ".json"]
-        },
         "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".json", ".ts", ".tsx"]
+            },
             "typescript": {}
         }
     },
     "rules": {
-        "prettier/prettier": "off",
-        "jsx-a11y/label-has-associated-control": "off",
-
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
-
-        "react/jsx-filename-extension": "off",
-        "react/jsx-indent": "off",
-        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": [2, 4],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
         "react/jsx-one-expression-per-line": "off",
 
-        "import/no-extraneous-dependencies": "off",
-        "import/prefer-default-export": "off",
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
 
-        "no-unused-expressions": "off",
         "no-console": "off",
-        "func-names": "off",
-        "no-unused-vars": "off",
-        "global-require": "off",
-        "no-param-reassign": "off",
-        "no-underscore-dangle": "off",
-        "no-inner-declarations": "off",
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "no-unused-expressions": "off",
+
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "func-names": "off"
     }
 }

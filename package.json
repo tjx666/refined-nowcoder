@@ -2,9 +2,8 @@
     "name": "refined-nowcoder",
     "version": "1.0.0",
     "description": "chrome extension for nowcoder",
-    "main": "index.js",
     "author": "YuTengjing",
-    "license": "MIT",
+    "license": "Apache",
     "private": true,
     "scripts": {
         "start": "cross-env NODE_ENV=development node ./server",
