@@ -31,10 +31,10 @@
     ],
     "browser_action": {
         "default_icon": {
-            "16": "icons/get_started16.png",
-            "32": "icons/get_started32.png",
-            "48": "icons/get_started48.png",
-            "128": "icons/get_started128.png"
+            "16": "icons/refined-nowcoder-x16.png",
+            "32": "icons/refined-nowcoder-x32.png",
+            "48": "icons/refined-nowcoder-x48.png",
+            "128": "icons/refined-nowcoder-x128.png"
         }
     },
     "options_ui": {
@@ -42,9 +42,9 @@
         "open_in_tab": true
     },
     "icons": {
-        "16": "icons/get_started16.png",
-        "32": "icons/get_started32.png",
-        "48": "icons/get_started48.png",
-        "128": "icons/get_started128.png"
+        "16": "icons/refined-nowcoder-x16.png",
+        "32": "icons/refined-nowcoder-x32.png",
+        "48": "icons/refined-nowcoder-x48.png",
+        "128": "icons/refined-nowcoder-x128.png"
     }
 }

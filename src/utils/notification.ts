@@ -1,6 +1,6 @@
 const defaultOptions = {
     type: 'basic',
-    iconUrl: 'icons/get_started48.png',
+    iconUrl: 'icons/refined-nowcoder-x48.png',
 };
 
 const notification = (title: string, message: string) => {
