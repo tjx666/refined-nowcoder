@@ -45,6 +45,7 @@ export default function() {
 
             const { code } = res.data;
             if (code === 0) {
+                // eslint-disable-next-line prefer-template
                 notification('牛客网自动打卡成功！', `打卡内容：${feeling ? feeling + '!' : ''}`);
             } else if (code === 999) {
                 // 999: 未登入
