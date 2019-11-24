@@ -18,7 +18,7 @@ module.exports = {
         hotUpdateMainFilename: 'hot/[hash].hot-update.json',
     },
     watchOptions: {
-        ignored: /node_modules/,
+        ignored: [/node_modules/, /dist/, /docs/, /server/],
     },
     module: {
         rules: [
@@ -44,7 +44,7 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             ident: 'postcss',
-                            plugins: [autoprefixer({})],
+                            plugins: [autoprefixer()],
                         },
                     },
                 ],
@@ -60,7 +60,7 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             ident: 'postcss',
-                            plugins: [autoprefixer({})],
+                            plugins: [autoprefixer()],
                         },
                     },
                     {
@@ -82,7 +82,7 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             ident: 'postcss',
-                            plugins: [autoprefixer({})],
+                            plugins: [autoprefixer()],
                         },
                     },
                     'sass-loader',

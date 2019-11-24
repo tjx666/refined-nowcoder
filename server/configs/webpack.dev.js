@@ -18,7 +18,7 @@ module.exports = merge.smart(common, {
             { from: resolve(projectRoot, 'src/manifest.dev.json'), to: 'manifest.json' },
         ]),
         new CircularDependencyPlugin({
-            exclude: /a\.js|node_modules/,
+            exclude: /node_modules/,
             failOnError: false,
         }),
     ],
