@@ -14,7 +14,6 @@ const smp = new SpeedMeasurePlugin();
 
 const prodConfig = merge.smart(common, {
     mode: 'production',
-    devtool: 'source-map',
     plugins: [
         new BundleAnalyzerPlugin(),
         new CopyPlugin([

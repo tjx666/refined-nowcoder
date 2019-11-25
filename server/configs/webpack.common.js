@@ -7,6 +7,19 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const entry = require('../utils/entry');
 
 const projectRoot = resolve(__dirname, '../../');
+const CSSLoaders = importLoaders => {
+    return [
+        MiniCssExtractPlugin.loader,
+        { loader: 'css-loader', options: { importLoaders } },
+        {
+            loader: 'postcss-loader',
+            options: {
+                ident: 'postcss',
+                plugins: [autoprefixer()],
+            },
+        },
+    ];
+};
 
 module.exports = {
     entry,
@@ -37,32 +50,12 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    { loader: 'css-loader', options: { constLoaders: 1 } },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            ident: 'postcss',
-                            plugins: [autoprefixer()],
-                        },
-                    },
-                ],
+                use: CSSLoaders(1),
             },
             {
                 test: /\.less$/,
                 use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            ident: 'postcss',
-                            plugins: [autoprefixer()],
-                        },
-                    },
+                    ...CSSLoaders(2),
                     {
                         loader: 'less-loader',
                         options: {
@@ -75,18 +68,7 @@ module.exports = {
             },
             {
                 test: /\.s[ac]ss$/i,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            ident: 'postcss',
-                            plugins: [autoprefixer()],
-                        },
-                    },
-                    'sass-loader',
-                ],
+                use: [...CSSLoaders(2), 'sass-loader'],
             },
             {
                 test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
