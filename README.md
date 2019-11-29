@@ -1,5 +1,7 @@
 # refined-nowcoder
 
+[![dependencies Status](https://david-dm.org/tjx666/refined-nowcoder/status.svg?style=flat-square)](https://david-dm.org/tjx666/refined-nowcoder)[![devDependencies Status](https://david-dm.org/tjx666/refined-nowcoder/dev-status.svg?style=flat-square)](https://david-dm.org/tjx666/refined-nowcoder?type=dev)
+
 [牛客网](https://www.nowcoder.com) chrome 扩展
 
 ## :sparkles: Features
@@ -14,11 +16,7 @@
 
 ## :package: Installation
 
-由于 chrome 应用商店发布应用之前需要先使用信用卡支付注册费，我的信用卡还没申请下来，预计这两周就能拿到卡并上架该扩展。如需提前体验可以下载[体验版](https://github.com/tjx666/refined-nowcoder/releases/download/v0.0.1/dist.zip)到本地，使用开发者模式加载已解压的的扩展。具体方法：
-
-进入到 `chrome://extensions` 扩展管理页面，点击右上角开关打开`开发者模式`，再点击左侧`加载已解压的扩展程序`按钮，选择下载并解压后的体验版扩展，这样扩展就安装完成了。
-
-![load local chrome extension](https://i.loli.net/2019/11/15/ODQP5vUWCxLaFfR.png)
+扩展已发布到 chrome 应用商店，欢迎体验使用 [refined nowcoder](https://chrome.google.com/webstore/detail/refined-nowcoder/jkkhnkldfjgmekpgkgdefeenfpmmnnem)。
 
 ## :hammer_and_wrench: Develop
 
@@ -59,7 +57,9 @@ npm start
 
 ### 4. 安装扩展
 
-参考 [installation](https://github.com/tjx666/refined-nowcoder#package-installation) 部分，注意扩展最后会打包到项目根目录下的 `dist` 文件夹中。
+进入到 `chrome://extensions` 扩展管理页面，点击右上角开关打开`开发者模式`，再点击左侧`加载已解压的扩展程序`按钮，选择下载并解压后的体验版扩展，这样扩展就安装完成了。
+
+![load local chrome extension](https://i.loli.net/2019/11/15/ODQP5vUWCxLaFfR.png)
 
 ### 5. 调试 react 项目
 
@@ -76,6 +76,10 @@ npm run devtools
 ![react-devtools](https://i.loli.net/2019/11/04/ujo8gBKqydxOpW9.png)
 
 ## :pencil: Changelog
+
+`2019-11-29`
+
+发布正式版 v1.0.0
 
 `2019-11-20`
 
