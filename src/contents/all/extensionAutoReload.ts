@@ -54,7 +54,7 @@ export default () => {
     source.addEventListener(
         'error',
         event => {
-            console.error('error event: ', event);
+            console.error(event);
             (event.target as any).readyState === 0 && console.error('请先打开 devServer!');
         },
         false
