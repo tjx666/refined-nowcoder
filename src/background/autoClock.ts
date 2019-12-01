@@ -1,4 +1,5 @@
 import axios from 'axios';
+import isOnline from 'is-online';
 import { onlineStorage } from 'utils/storage';
 import notifications from '@/utils/notifications';
 
@@ -24,7 +25,8 @@ export default function() {
             return;
         }
 
-        if (autoClock && lastClockDate !== todayDateString) {
+        // 没有可用网络不打卡
+        if (autoClock && lastClockDate !== todayDateString && (await isOnline())) {
             const clockURL = 'https://www.nowcoder.com/clock/new';
             let res: any;
             try {
@@ -38,7 +40,7 @@ export default function() {
                     }
                 );
             } catch (err) {
-                !autoClockFailed && notifications('牛客网自动打卡失败！', `可能是网络出错或者牛客服务器异常`);
+                !autoClockFailed && notifications('牛客自动打卡失败！', `原因：牛客服务器异常`);
                 onlineStorage.set({ autoClockFailed: true });
                 return;
             }
@@ -49,7 +51,7 @@ export default function() {
                 notifications('牛客网自动打卡成功！', `打卡内容：${feeling ? feeling + '!' : ''}`);
             } else if (code === 999) {
                 // 999: 未登入
-                !autoClockFailed && notifications('牛客网自动打卡失败！', `您尚未登入牛客！`);
+                !autoClockFailed && notifications('牛客网自动打卡失败！', `原因：您尚未登入牛客！`);
                 onlineStorage.set({ autoClockFailed: true });
                 return;
             } else if (code === 1) {
@@ -61,20 +63,23 @@ export default function() {
 
     // 启动浏览器的时候打一次卡
     clock();
-    // 隔十分钟打一次
-    autoClockTimer = window.setInterval(clock, 10 * 60 * 1000);
+    // 隔5分钟打一次
+    autoClockTimer = window.setInterval(clock, 5 * 60 * 1000);
 
     // 处理开启或关闭自动打卡功能
-    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    chrome.runtime.onMessage.addListener(request => {
         if (request && request.from === 'options') {
             if (request.action === 'enable-auto-clock') {
                 // 开启自动打卡的时候打一次卡
                 clock();
-                // 隔十分钟再打一次
+
+                // 清除原本的定时器
                 if (autoClockTimer !== undefined) {
                     clearInterval(autoClockTimer);
                 }
-                autoClockTimer = window.setInterval(clock, 10 * 60 * 1000);
+
+                // 隔5分钟打一次
+                autoClockTimer = window.setInterval(clock, 5 * 60 * 1000);
             } else if (request.action === 'disable-auto-clock') {
                 clearInterval(autoClockTimer);
                 autoClockTimer = undefined;
