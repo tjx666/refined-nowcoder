@@ -47,7 +47,7 @@ export default async function blockPosts() {
 
             // 屏蔽交友贴
             if (blockMakeFriends) {
-                const blockRegexps = [/找.{1,2}友/, /征.{1,2}友/, /相亲/];
+                const blockRegexps = [/(找|征).*?(男|女)朋?友/, /相亲/];
                 const excludeBlockRegexps: RegExp[] = [];
                 const shouldBlock =
                     excludeBlockRegexps.every(reg => !reg.test(title)) &&
