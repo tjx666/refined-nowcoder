@@ -1,6 +1,6 @@
 # refined-nowcoder
 
-[![dependencies Status](https://david-dm.org/tjx666/refined-nowcoder/status.svg?style=flat-square)](https://david-dm.org/tjx666/refined-nowcoder)[![devDependencies Status](https://david-dm.org/tjx666/refined-nowcoder/dev-status.svg?style=flat-square)](https://david-dm.org/tjx666/refined-nowcoder?type=dev)
+[![dependencies Status](https://david-dm.org/tjx666/refined-nowcoder/status.svg?style=flat-square)](https://david-dm.org/tjx666/refined-nowcoder) [![devDependencies Status](https://david-dm.org/tjx666/refined-nowcoder/dev-status.svg?style=flat-square)](https://david-dm.org/tjx666/refined-nowcoder?type=dev)
 
 牛客网 chrome 扩展
 
@@ -10,7 +10,7 @@
 
 - :clock12: 自动打卡
 
-- :arrow_up: 双击返回顶部
+- :arrow_up: 双击返回顶部 kexport
 
 更多功能正在开发中...
 
