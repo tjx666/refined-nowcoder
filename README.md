@@ -2,7 +2,7 @@
 
 [![dependencies Status](https://david-dm.org/tjx666/refined-nowcoder/status.svg?style=flat-square)](https://david-dm.org/tjx666/refined-nowcoder)[![devDependencies Status](https://david-dm.org/tjx666/refined-nowcoder/dev-status.svg?style=flat-square)](https://david-dm.org/tjx666/refined-nowcoder?type=dev)
 
-[牛客网](https://www.nowcoder.com) chrome 扩展
+牛客网 chrome 扩展
 
 ## :sparkles: Features
 
@@ -20,13 +20,13 @@
 
 ## :hammer_and_wrench: Develop
 
-### 1. 克隆项目到本地
+### 克隆项目到本地
 
 ```bash
 git clone git@github.com:tjx666/refined-nowcoder.git
 ```
 
-### 2. 安装依赖
+### 安装依赖
 
 ```bash
 # 先切到项目所在路径
@@ -39,53 +39,47 @@ yarn
 npm install
 ```
 
-### 3. 启动项目
+### 启动项目
+
+启动 devServer：
 
 ```bash
 npm start
 ```
 
-### 4. 安装扩展
+由于 chrome 的限制，官方的 [react devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) chrome 扩展并不能审查 `chrome-extension://` 协议的页面如 options，popup 页面。所以需要使用独立的 [react devtools](https://www.npmjs.com/package/react-devtools)，启动 devServer 的同时打开独立的 devtools 窗口：
 
-进入到 `chrome://extensions` 扩展管理页面，点击右上角开关打开`开发者模式`，再点击左侧`加载已解压的扩展程序`按钮，选择下载并解压后的体验版扩展，这样扩展就安装完成了。
-
-![load local chrome extension](https://i.loli.net/2019/11/15/ODQP5vUWCxLaFfR.png)
-
-### 5. 调试 react 项目
-
-因为 chrome 的 react-devtools 扩展不能审查 chrome 页面，所以需要使用独立的 [react-devtools](https://www.npmjs.com/package/react-devtools) 工具。启动命令：
-
-```javascript
+```bash
 npm run devtools
 ```
-
-会在启动项目的同时打开独立的 devtools 窗口。
 
 **效果图：**
 
 ![react-devtools](https://i.loli.net/2019/11/04/ujo8gBKqydxOpW9.png)
 
-### 6. 编写代码
+### 安装扩展
 
-项目结构和我另一个模板项目 [awesome-chrome-extension-boilerplate](https://github.com/tjx666/awesome-chrome-extension-boilerplate) 相似 ：
+进入到 `chrome://extensions` 扩展管理页面，点击右上角开关打开`开发者模式`，再点击左侧`加载已解压的扩展程序`按钮，选择 webpack 打包生成的 dist 文件夹，这样就安装完成了。
 
-![structure](https://i.loli.net/2019/11/29/8eJl1czVSsvX25h.png)
+![load local chrome extension](https://i.loli.net/2019/11/15/ODQP5vUWCxLaFfR.png)
+
+### 编写代码
 
 #### background
 
-background script 入口在 `src/background/index.ts`，它是一个 webpack entry，最终编译到成`dist/js/background.js`，建议将每个功能抽取成一个模块，再统一导入到 index.ts 中。
+background script 入口文件是 `src/background/index.ts`，它是一个 webpack entry，最终编译到`dist/js/background.js`。建议将每个功能抽取成一个模块，再统一导入到 index.ts 中。
 
 #### options
 
-options 即选项页面完全就是一个普通的 react + TypeScript SPA。
+options 即选项页面完全就是一个普通的使用了 react + TypeScript 技术栈的 SPA(single page application)。
 
 #### content scripts
 
 content scripts 都放在 `src/contents` 目录下。默认有个 all.ts，它不能被删除，因为这个 webpack entry 要注入用于支持 chrome 扩展自动刷新的功能的补丁。
 
-**举个栗子：**
+**举个:chestnut:：**
 
-当你要给 URL 是以 `https://www.nowcoder.com/discuss` 为前缀的页面开发 content script，你需要做下面两步:
+当你要给 URL 是以 `https://www.nowcoder.com/discuss` 为前缀的页面开发 content script 时，你只需要做下面两步:
 
 1. 添加 content scripts 和页面 URL 之间的映射到 `manifest.dev.json` 和 `manifest.prod.json`:
 
@@ -94,6 +88,7 @@ content scripts 都放在 `src/contents` 目录下。默认有个 all.ts，它�
        {
            "matches": ["https://www.nowcoder.com/discuss*"],
            "css": ["css/discuss.css"],
+           // 因为 content js script 是 js/discuss.js，所以添加的文件夹也应该是 discuss
            "js": ["js/discuss.js"]
        }
    ],
@@ -101,13 +96,13 @@ content scripts 都放在 `src/contents` 目录下。默认有个 all.ts，它�
 
 2. 创建一个和上面 content js script 路径对应的文件夹 `src/contents/discuss`。构建脚本会把`src/discuss/index.tsx` 或者 `src/discuss/index.ts` 视为 webpack entry。
 
-   **mini-css-extract-plugin** 将所有被 `discuss` entry 导入的样式文件分离到 `dist/css/discuss.css`，这也是为什么上面的 manifest.json 中 content CSS script 可以使用 `css/discuss.css` 的原因
+   webpack 插件 `mini-css-extract-plugin` 会将所有被 `discuss` entry 导入的样式文件分离到 `dist/css/discuss.css`，所以上面的 manifest.json 中 content CSS script 可以使用 `css/discuss.css` 。
 
 ## :pencil: Changelog
 
 `2019-12-1`
 
-优化屏蔽交友贴逻辑
+优化屏蔽交友贴正则
 
 `2019-11-29`
 
@@ -144,4 +139,4 @@ content scripts 都放在 `src/contents` 目录下。默认有个 all.ts，它�
 
 ## :handshake: Contributing [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-非常欢迎提出你的宝贵意见和 pull request。
+非常欢迎提出你的宝贵意见和 PRs。
