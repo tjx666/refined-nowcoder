@@ -1,4 +1,4 @@
-# refined-nowcoder
+# refined nowcoder
 
 [![dependencies Status](https://david-dm.org/tjx666/refined-nowcoder/status.svg?style=flat-square)](https://david-dm.org/tjx666/refined-nowcoder) [![devDependencies Status](https://david-dm.org/tjx666/refined-nowcoder/dev-status.svg?style=flat-square)](https://david-dm.org/tjx666/refined-nowcoder?type=dev)
 
@@ -20,13 +20,13 @@
 
 ## :hammer_and_wrench: Develop
 
-### 克隆项目到本地
+### 1. 克隆项目到本地
 
 ```bash
 git clone git@github.com:tjx666/refined-nowcoder.git
 ```
 
-### 安装依赖
+### 2. 安装依赖
 
 ```bash
 # 先切到项目所在路径
@@ -39,7 +39,7 @@ yarn
 npm install
 ```
 
-### 启动项目
+### 3. 启动项目
 
 启动 devServer：
 
@@ -57,13 +57,13 @@ npm run devtools
 
 ![react-devtools](https://i.loli.net/2019/11/04/ujo8gBKqydxOpW9.png)
 
-### 安装扩展
+### 4. 安装扩展
 
 进入到 `chrome://extensions` 扩展管理页面，点击右上角开关打开`开发者模式`，再点击左侧`加载已解压的扩展程序`按钮，选择 webpack 打包生成的 dist 文件夹，这样就安装完成了。
 
 ![load local chrome extension](https://i.loli.net/2019/11/15/ODQP5vUWCxLaFfR.png)
 
-### 编写代码
+### 5. 编写代码
 
 #### background
 
@@ -77,13 +77,13 @@ options 即选项页面完全就是一个普通的使用了 react + TypeScript �
 
 content scripts 都放在 `src/contents` 目录下。默认有个 all.ts，它不能被删除，因为这个 webpack entry 要注入用于支持 chrome 扩展自动刷新的功能的补丁。
 
-**举个:chestnut:：**
+**举个 ​ :chestnut: ：**
 
 当你要给 URL 是以 `https://www.nowcoder.com/discuss` 为前缀的页面开发 content script 时，你只需要做下面两步:
 
 1. 添加 content scripts 和页面 URL 之间的映射到 `manifest.dev.json` 和 `manifest.prod.json`:
 
-   ```json
+   ```javascript
    "content_scripts": [
        {
            "matches": ["https://www.nowcoder.com/discuss*"],
@@ -102,7 +102,13 @@ content scripts 都放在 `src/contents` 目录下。默认有个 all.ts，它�
 
 `2019-12-1`
 
-优化屏蔽交友贴正则
+优化屏蔽交友贴的正则
+
+选项页面添加帮助部分
+
+优化帖子列表底下的屏蔽信息
+
+当没有网络时不再自动打卡
 
 `2019-11-29`
 
@@ -139,4 +145,4 @@ content scripts 都放在 `src/contents` 目录下。默认有个 all.ts，它�
 
 ## :handshake: Contributing [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-非常欢迎提出你的宝贵意见和 PRs。
+欢迎提出你的宝贵意见和 pull requests。
