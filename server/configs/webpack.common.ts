@@ -1,13 +1,15 @@
-const { resolve } = require('path');
-const autoprefixer = require('autoprefixer');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const entry = require('../utils/entry');
+import { resolve } from 'path';
+import { Configuration, HashedModuleIdsPlugin } from 'webpack';
+import autoprefixer from 'autoprefixer';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
+import entry from '../utils/entry';
 
 const projectRoot = resolve(__dirname, '../../');
-const CSSLoaders = importLoaders => {
+
+const CSSLoaders = (importLoaders: number) => {
     return [
         MiniCssExtractPlugin.loader,
         { loader: 'css-loader', options: { importLoaders } },
@@ -21,7 +23,7 @@ const CSSLoaders = importLoaders => {
     ];
 };
 
-module.exports = {
+const commonConfig: Configuration = {
     entry,
     output: {
         publicPath: '/',
@@ -33,6 +35,48 @@ module.exports = {
     watchOptions: {
         ignored: [/node_modules/, /dist/, /docs/, /server/],
     },
+    resolve: {
+        extensions: ['.ts', '.tsx', '.json', '.js', '.jsx'],
+        alias: {
+            'react-dom': '@hot-loader/react-dom',
+            '@': resolve(projectRoot, 'src'),
+            utils: resolve(projectRoot, 'src/utils'),
+            styles: resolve(projectRoot, 'src/styles'),
+        },
+    },
+    plugins: [
+        new HashedModuleIdsPlugin({
+            hashFunction: 'sha256',
+            hashDigest: 'hex',
+            hashDigestLength: 20,
+        }),
+        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+        new HtmlWebpackPlugin({
+            chunks: ['options'],
+            filename: 'options.html',
+            title: 'options page',
+            template: resolve(projectRoot, 'public/options.html'),
+            inject: 'body',
+            minify: false,
+            cache: true,
+        }),
+        // new HtmlWebpackPlugin({
+        //     chunks: ['popup'],
+        //     filename: 'popup.html',
+        //     title: 'popup page',
+        //     template: resolve(projectRoot, 'public/popup.html'),
+        //     inject: 'body',
+        //     minify: false,
+        //     cache: true,
+        // }),
+        new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
+        new CircularDependencyPlugin({
+            exclude: /node_modules/,
+            failOnError: true,
+            allowAsyncCycles: false,
+            cwd: process.cwd(),
+        }),
+    ],
     module: {
         rules: [
             {
@@ -97,28 +141,6 @@ module.exports = {
             },
         ],
     },
-    plugins: [
-        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-        new HtmlWebpackPlugin({
-            filename: 'options.html',
-            chunks: ['options'],
-            title: 'Refined Nowcoder - 选项与帮助',
-            template: resolve(projectRoot, 'public/options.html'),
-            inject: 'body',
-            minify: false,
-        }),
-        new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
-        }),
-        new ForkTsCheckerWebpackPlugin({ memoryLimit: 1024 }),
-    ],
-    resolve: {
-        alias: {
-            'react-dom': '@hot-loader/react-dom',
-            '@': resolve(projectRoot, 'src'),
-            utils: resolve(projectRoot, 'src/utils'),
-            styles: resolve(projectRoot, 'src/styles'),
-        },
-        extensions: ['.ts', '.tsx', '.js', '.json'],
-    },
 };
+
+export default commonConfig;

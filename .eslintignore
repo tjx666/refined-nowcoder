@@ -3,3 +3,5 @@
 
 public/vendor
 dist/
+
+server/typings

@@ -1,4 +1,4 @@
 import autoClock from './autoClock';
-import './listeners';
+import './messages';
 
 autoClock();
