@@ -2,6 +2,7 @@
 import * as React from 'react';
 import $ from 'jquery';
 import _ from 'lodash';
+import { Icon } from 'antd';
 
 interface BlockInfosProps {
     blockedPostsLis: HTMLElement[];
@@ -31,17 +32,30 @@ const BlockInfos = ({
         setShowBlockedLis(!showBlockedLis);
     };
 
+    const infos = React.useMemo(() => {
+        const infosElements: string[] = [];
+        if (blockWishCount) {
+            infosElements.push(`${blockWishCount} 条许愿贴`);
+        }
+
+        if (blockMakeFriendsCount > 0) {
+            infosElements.push(`${blockMakeFriendsCount} 条交友贴`);
+        }
+
+        if (blockByCustomRulesCount > 0) {
+            infosElements.push(`${blockByCustomRulesCount} 条被自定义规则屏蔽`);
+        }
+
+        return infosElements.join('，');
+    }, [blockWishCount, blockMakeFriendsCount, blockByCustomRulesCount]);
+
     return (
-        <p className="block-post-infos">
-            <span>共屏蔽 {blockedPostsLis.length} 条帖子，</span>
-            {blockWishCount > 0 && <span>{blockWishCount} 条许愿贴，</span>}
-            {blockMakeFriendsCount > 0 && <span>{blockMakeFriendsCount}条交友贴，</span>}
-            {blockByCustomRulesCount > 0 && <span>{blockByCustomRulesCount}条被自定义规则屏蔽</span>}
-            &nbsp;
-            <span className="show-block-posts-switch" onClick={handleToggle}>
-                {showBlockedLis ? '屏蔽' : '展示'}
+        <div className="block-post-infos">
+            <span>{`屏蔽了 ${infos}`}</span>
+            <span className="show-block-posts-icon" onClick={handleToggle}>
+                {showBlockedLis ? <Icon type="eye-invisible" theme="filled" /> : <Icon type="eye" theme="filled" />}
             </span>
-        </p>
+        </div>
     );
 };
 
