@@ -1,5 +1,4 @@
 import $ from 'jquery';
-// require('jquery.easing')($);
 
 export default () => {
     $(document).dblclick(function() {

@@ -25,7 +25,7 @@ const Home = () => {
         syncOnlineSettings();
     }, [syncOnlineSettings]);
 
-    const getSettingsChangeHandler = (key: string) => {
+    const getSettingsChangeHandler = (key: keyof typeof settings) => {
         return (checked: boolean) => {
             const newSettings = { ...settings, [key]: checked };
             onlineStorage.set({ ...newSettings });
@@ -43,6 +43,14 @@ const Home = () => {
                     extraType="switch"
                     checked={settings.doubleClickBackToTop}
                     onChange={getSettingsChangeHandler('doubleClickBackToTop')}
+                />
+            </SettingCard>
+            <SettingCard title="帮助">
+                <SettingRow label="项目主页" extraType="link" to="https://github.com/tjx666/refined-nowcoder" />
+                <SettingRow
+                    label="遇到问题？"
+                    extraType="link"
+                    to="https://github.com/tjx666/refined-nowcoder/issues"
                 />
             </SettingCard>
         </div>

@@ -5,13 +5,16 @@ import './style.scss';
 
 interface PageLayoutProps {
     className?: string;
-    contentClasses?: string;
+    contentClassName?: string;
     title: string;
     backTo: string;
     children: React.ReactNode;
 }
 
-const PageLayout = ({ className = '', contentClasses = '', title, backTo, children }: PageLayoutProps) => {
+const PageLayout = ({ className = '', contentClassName = '', title, backTo, children }: PageLayoutProps) => {
+    const layoutClasses = React.useMemo(() => `page-layout ${className}`, [className]);
+    const contentClasses = React.useMemo(() => `page-layout-content ${contentClassName}`, [contentClassName]);
+
     const backToArrow = React.useMemo(() => {
         return (
             backTo && (
@@ -23,12 +26,12 @@ const PageLayout = ({ className = '', contentClasses = '', title, backTo, childr
     }, [backTo]);
 
     return (
-        <div className={`page-layout ${className}`}>
+        <div className={layoutClasses}>
             <div className="top">
                 {backToArrow}
                 {title}
             </div>
-            <div className={`page-layout-content ${contentClasses}`}>{children}</div>
+            <div className={contentClasses}>{children}</div>
         </div>
     );
 };

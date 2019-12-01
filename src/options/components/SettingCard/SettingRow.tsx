@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Switch, Icon } from 'antd';
@@ -30,6 +31,22 @@ const SettingRow = ({ label, subLabel, children, extraType = 'none', checked, on
         );
     }, [label, subLabel]);
 
+    const linkCaret = React.useMemo(() => {
+        if (to && to.includes('http')) {
+            return (
+                <a href={to} key="link">
+                    <Icon className="caret-icon" type="caret-right" />
+                </a>
+            );
+        }
+
+        return (
+            <Link to={to!} key="link">
+                <Icon className="caret-icon" type="caret-right" />
+            </Link>
+        );
+    }, [to]);
+
     const handleChange = React.useCallback(
         (isChecked: boolean, event: MouseEvent) => {
             onChange && onChange(isChecked, event);
@@ -49,12 +66,7 @@ const SettingRow = ({ label, subLabel, children, extraType = 'none', checked, on
                             </label>
                         );
                     case 'link':
-                        return [
-                            labels,
-                            <Link to={to!} key="link">
-                                <Icon className="caret-icon" type="caret-right" />
-                            </Link>,
-                        ];
+                        return [labels, linkCaret];
                     default:
                         return [labels, children];
                 }

@@ -9,19 +9,12 @@ import './style.scss';
 const { TextArea } = Input;
 const { Item: FormItem } = Form;
 
-interface BlockSetting {
-    blockWish: boolean;
-    blockMakeFriends: boolean;
-    blockPostRegexps: string;
-}
-
 const BlockPost = () => {
-    const [blockSettings, setBlockSettings] = React.useState<BlockSetting>({
+    const [blockSettings, setBlockSettings] = React.useState({
         blockWish: false,
         blockMakeFriends: false,
         blockPostRegexps: '',
     });
-
     const [errorRegexpStr, setErrorRegexpStr] = React.useState<string>('');
 
     const updateErrorRegexp = (blockPostRegexps: string) => {
@@ -32,21 +25,21 @@ const BlockPost = () => {
         setErrorRegexpStr(newErrorRegexpStr || '');
     };
 
-    React.useEffect(() => {
-        const syncOnlineSetting = async () => {
-            const onlineBlockSettings = await onlineStorage.get({
-                blockWish: false,
-                blockMakeFriends: false,
-                blockPostRegexps: '',
-            });
-            setBlockSettings(onlineBlockSettings);
-            updateErrorRegexp(onlineBlockSettings.blockPostRegexps);
-        };
-
-        syncOnlineSetting();
+    const syncOnlineSetting = React.useCallback(async () => {
+        const onlineBlockSettings = await onlineStorage.get({
+            blockWish: false,
+            blockMakeFriends: false,
+            blockPostRegexps: '',
+        });
+        setBlockSettings(onlineBlockSettings);
+        updateErrorRegexp(onlineBlockSettings.blockPostRegexps);
     }, []);
 
-    const getSettingChangeHandler = (key: keyof BlockSetting) => {
+    React.useEffect(() => {
+        syncOnlineSetting();
+    }, [syncOnlineSetting]);
+
+    const getSettingChangeHandler = (key: keyof typeof blockSettings) => {
         return (checked: boolean) => {
             setBlockSettings({ ...blockSettings, [key]: checked });
             onlineStorage.set({ [key]: checked });
@@ -60,17 +53,19 @@ const BlockPost = () => {
         onlineStorage.set({ blockPostRegexps: newBlockPostRegexps });
     };
 
-    const customRulesLabel = (
-        <span>
-            自定义规则：
-            <Tooltip title="每一行都是一规则，每个规则就是一个正则表达式，当一个帖子标题匹配任意一个规则时将被屏蔽">
-                <Icon className="question-icon" type="question-circle" theme="filled" />
-            </Tooltip>
-        </span>
-    );
+    const customRulesLabel = React.useMemo(() => {
+        return (
+            <span>
+                自定义规则：
+                <Tooltip title="每一行都是一规则，每个规则就是一个正则表达式，当一个帖子标题匹配任意一个规则时将被屏蔽">
+                    <Icon className="question-icon" type="question-circle" theme="filled" />
+                </Tooltip>
+            </span>
+        );
+    }, []);
 
     return (
-        <PageLayout className="block-post" contentClasses="block-post-content" title="屏蔽帖子设置" backTo="/">
+        <PageLayout className="block-post" contentClassName="block-post-content" title="屏蔽帖子设置" backTo="/">
             <SettingRow
                 label="屏蔽许愿贴"
                 extraType="switch"
