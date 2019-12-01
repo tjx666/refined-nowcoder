@@ -45,16 +45,6 @@ npm install
 npm start
 ```
 
-其实 webpack 热更新的问题花了我挺多精力，目前基本上完美解决了 chrome 扩展的各种页面的热更新问题。
-
-不过 content scripts 还是没法局部刷新，根本原因是因为 webpack 采用的是 jsonp 拉取更新补丁，而更新补丁那个 js 文件由于 chrome 限制，是文法访问 content script 脚本中的 `webpackHotUpdate` 函数的，所以 content scripts 无法做到热更新。优雅降级处理，我做到了如果你修改了 content scripts 的代码，会先自动 reload 扩展，再自动刷新页面。
-
-具体原理：
-
-> 给 webpack compiler 的 done 事件挂了个钩子，这个钩子的作用就是在没有编译出错并且修改的代码所在的模块的 entry 就是 content scripts 之一的情况下通过 SSE 推送消息给注入了 content scripts 的页面。所有的注入了 content scripts 页面也都注入了一个 ExtensionAutoReload.js 的补丁，这个补丁获取到 SSE 的消息后会和 background.js 通信，让 background,js 去 reload 扩展，再过 200ms 后 reload 当前页面
-
-会其它页面如 options, popup, background 热更新都是正常的，包括 react 组件的局部刷新都配置好了。
-
 ### 4. 安装扩展
 
 进入到 `chrome://extensions` 扩展管理页面，点击右上角开关打开`开发者模式`，再点击左侧`加载已解压的扩展程序`按钮，选择下载并解压后的体验版扩展，这样扩展就安装完成了。
@@ -75,7 +65,49 @@ npm run devtools
 
 ![react-devtools](https://i.loli.net/2019/11/04/ujo8gBKqydxOpW9.png)
 
+### 6. 编写代码
+
+项目结构和我另一个模板项目 [awesome-chrome-extension-boilerplate](https://github.com/tjx666/awesome-chrome-extension-boilerplate) 相似 ：
+
+![structure](https://i.loli.net/2019/11/29/8eJl1czVSsvX25h.png)
+
+#### background
+
+background script 入口在 `src/background/index.ts`，它是一个 webpack entry，最终编译到成`dist/js/background.js`，建议将每个功能抽取成一个模块，再统一导入到 index.ts 中。
+
+#### options
+
+options 即选项页面完全就是一个普通的 react + TypeScript SPA。
+
+#### content scripts
+
+content scripts 都放在 `src/contents` 目录下。默认有个 all.ts，它不能被删除，因为这个 webpack entry 要注入用于支持 chrome 扩展自动刷新的功能的补丁。
+
+**举个栗子：**
+
+当你要给 URL 是以 `https://www.nowcoder.com/discuss` 为前缀的页面开发 content script，你需要做下面两步:
+
+1. 添加 content scripts 和页面 URL 之间的映射到 `manifest.dev.json` 和 `manifest.prod.json`:
+
+   ```json
+   "content_scripts": [
+       {
+           "matches": ["https://www.nowcoder.com/discuss*"],
+           "css": ["css/discuss.css"],
+           "js": ["js/discuss.js"]
+       }
+   ],
+   ```
+
+2. 创建一个和上面 content js script 路径对应的文件夹 `src/contents/discuss`。构建脚本会把`src/discuss/index.tsx` 或者 `src/discuss/index.ts` 视为 webpack entry。
+
+   **mini-css-extract-plugin** 将所有被 `discuss` entry 导入的样式文件分离到 `dist/css/discuss.css`，这也是为什么上面的 manifest.json 中 content CSS script 可以使用 `css/discuss.css` 的原因
+
 ## :pencil: Changelog
+
+`2019-12-1`
+
+优化屏蔽交友贴逻辑
 
 `2019-11-29`
 
