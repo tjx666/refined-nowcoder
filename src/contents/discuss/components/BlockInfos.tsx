@@ -53,7 +53,7 @@ const BlockInfos = ({
         <div className="block-post-infos">
             <span>{`屏蔽了 ${infos}`}</span>
             <span className="show-block-posts-icon" onClick={handleToggle}>
-                {showBlockedLis ? <Icon type="eye-invisible" theme="filled" /> : <Icon type="eye" theme="filled" />}
+                {showBlockedLis ? <Icon type="eye-invisible" /> : <Icon type="eye" />}
             </span>
         </div>
     );
