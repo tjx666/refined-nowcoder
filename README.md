@@ -10,7 +10,7 @@
 
 - :clock12: 自动打卡
 
-- :arrow_up: 双击返回顶部 kexport
+- :arrow_up: 双击返回顶部
 
 更多功能正在开发中...
 
@@ -98,7 +98,31 @@ content scripts 都放在 `src/contents` 目录下。默认有个 all.ts，它�
 
    webpack 插件 `mini-css-extract-plugin` 会将所有被 `discuss` entry 导入的样式文件分离到 `dist/css/discuss.css`，所以上面的 manifest.json 中 content CSS script 可以使用 `css/discuss.css` 。
 
+## :construction_worker: build
+
+构建生产级别的 bundle：
+
+```bash
+npm run build
+```
+
+## :link: Reference
+
+1. [【干货】Chrome 插件(扩展)开发全攻略](https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html)
+2. [一篇文章教你顺利入门和开发 chrome 扩展程序（插件）](https://juejin.im/post/5c135a275188257284143418)
+3. [Chrome extension 开发官方文档](https://developer.chrome.com/extensions/devguide)
+4. [chrome-extension-book](https://lightningminers.gitbook.io/chrome-extension-book/)
+5. [refined-github](https://github.com/sindresorhus/refined-github/)
+6. [v2ex-plus](https://github.com/sciooga/v2ex-plus)
+
+## :handshake: Contributing [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+欢迎提出你的宝贵意见和 pull requests。
+
 ## :pencil: Changelog
+
+`2019-12-2`
+release v1.0.1
 
 `2019-12-1`
 
@@ -133,16 +157,3 @@ content scripts 都放在 `src/contents` 目录下。默认有个 all.ts，它�
 `2019-11-04`
 
 新增选项与帮助页面
-
-## :link: Reference
-
-1. [【干货】Chrome 插件(扩展)开发全攻略](https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html)
-2. [一篇文章教你顺利入门和开发 chrome 扩展程序（插件）](https://juejin.im/post/5c135a275188257284143418)
-3. [Chrome extension 开发官方文档](https://developer.chrome.com/extensions/devguide)
-4. [chrome-extension-book](https://lightningminers.gitbook.io/chrome-extension-book/)
-5. [refined-github](https://github.com/sindresorhus/refined-github/)
-6. [v2ex-plus](https://github.com/sciooga/v2ex-plus)
-
-## :handshake: Contributing [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-
-欢迎提出你的宝贵意见和 pull requests。
