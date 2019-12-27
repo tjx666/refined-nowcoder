@@ -5,6 +5,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
+
 import entry from '../utils/entry';
 
 const projectRoot = resolve(__dirname, '../../');
@@ -36,7 +37,7 @@ const commonConfig: Configuration = {
         ignored: [/node_modules/, /dist/, /docs/, /server/],
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.json', '.js', '.jsx'],
+        extensions: ['.ts', '.tsx', '.js', '.json'],
         alias: {
             'react-dom': '@hot-loader/react-dom',
             '@': resolve(projectRoot, 'src'),
@@ -57,18 +58,8 @@ const commonConfig: Configuration = {
             title: 'options page',
             template: resolve(projectRoot, 'public/options.html'),
             inject: 'body',
-            minify: false,
             cache: true,
         }),
-        // new HtmlWebpackPlugin({
-        //     chunks: ['popup'],
-        //     filename: 'popup.html',
-        //     title: 'popup page',
-        //     template: resolve(projectRoot, 'public/popup.html'),
-        //     inject: 'body',
-        //     minify: false,
-        //     cache: true,
-        // }),
         new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
         new CircularDependencyPlugin({
             exclude: /node_modules/,
@@ -111,7 +102,7 @@ const commonConfig: Configuration = {
                 ],
             },
             {
-                test: /\.s[ac]ss$/i,
+                test: /\.s[ac]ss$/,
                 use: [...CSSLoaders(2), 'sass-loader'],
             },
             {
@@ -121,7 +112,7 @@ const commonConfig: Configuration = {
                         loader: 'url-loader',
                         options: {
                             limit: 8192,
-                            name: '[name].[hash:8].[ext]',
+                            name: '[name].[hash].[ext]',
                             outputPath: 'images',
                         },
                     },
@@ -133,7 +124,7 @@ const commonConfig: Configuration = {
                     {
                         loader: 'url-loader',
                         options: {
-                            name: '[name]-[contenthash].[ext]',
+                            name: '[name]-[hash].[ext]',
                             outputPath: 'fonts',
                         },
                     },

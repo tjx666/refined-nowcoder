@@ -1,6 +1,8 @@
 import express from 'express';
 import chalk from 'chalk';
 import webpack from 'webpack';
+import logSymbols from 'log-symbols';
+
 import devMiddlewares from '../middlewares/devMiddlewares';
 import extensionAutoReload from '../middlewares/extensionAutoReload';
 import serverConfig from '../configs/server.config';
@@ -9,6 +11,7 @@ import devConfig from '../configs/webpack.dev';
 const start = () => {
     const devServer = express();
     const compiler = webpack(devConfig);
+
     devMiddlewares(devServer, compiler);
     devServer.use('/__extension_auto_reload__', extensionAutoReload(compiler));
 
@@ -20,7 +23,7 @@ const start = () => {
         } else {
             const address = `http://${HOST}:${PORT}`;
             // prettier-ignore
-            console.log(`${chalk.green.bold('INFO')} DevServer running at ${chalk.magenta.bold.underline(address)} ${chalk.green('✓')}`);
+            console.log(`${chalk.bgYellow.black.bold(' INFO ')} DevServer is running at ${chalk.magenta.bold.underline(address)} ${logSymbols.success}`);
         }
     });
 

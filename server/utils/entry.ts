@@ -4,6 +4,7 @@ import fs from 'fs';
 import { argv } from 'yargs';
 import { exec as tempExec } from 'child_process';
 import tempUtils from 'util';
+
 import serverConfig from '../configs/server.config';
 
 const sourcePath = resolve(__dirname, '../../src');
@@ -13,13 +14,11 @@ const HMRClientScript = `webpack-hot-middleware/client?path=${HMRSSEPath}&reload
 const devEntry: Record<string, string[]> = {
     background: [HMRClientScript, resolve(sourcePath, './background/index.ts')],
     options: [HMRClientScript, 'react-hot-loader/patch', resolve(sourcePath, './options/index.tsx')],
-    // popup: [HMRClientScript, 'react-hot-loader/patch', resolve(sourcePath, './popup/index.tsx')],
 };
 
 const prodEntry: Record<string, string[]> = {
     background: [resolve(sourcePath, './background/index.ts')],
     options: [resolve(sourcePath, './options/index.tsx')],
-    // popup: [resolve(sourcePath, './popup/index.tsx')],
 };
 
 const isProd = process.env.NODE_ENV !== 'development';

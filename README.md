@@ -122,6 +122,7 @@ npm run build
 ## :pencil: Changelog
 
 `2019-12-2`
+
 release v1.0.1
 
 `2019-12-1`
