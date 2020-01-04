@@ -34,16 +34,31 @@
         "react/jsx-one-expression-per-line": "off",
 
         "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+        "import/extensions": "off",
 
         "no-console": "off",
         "no-plusplus": "off",
         "no-unused-expressions": "off",
-        "func-names": "off" ,
+        "func-names": "off",
         "global-require": "off",
 
         "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-var-requires": "off"
-    }
+    },
+    "overrides": [
+        {
+            "files": ["server/**/*.ts"],
+            "rules": {
+                "global-require": "off",
+                "no-unused-expressions": "off",
+
+                "import/no-extraneous-dependencies": "off",
+                "import/no-dynamic-require": "off",
+
+                "@typescript-eslint/no-var-requires": "off"
+            }
+        }
+    ]
 }

@@ -1,8 +1,7 @@
 {
     "compilerOptions": {
-        "target": "ESNEXT",
+        "target": "ESNext",
         "module": "ESNext",
-        "lib": ["dom", "dom.iterable", "esnext"],
         "allowJs": true,
         "checkJs": true,
         "jsx": "react",
@@ -28,5 +27,5 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true
     },
-    "exclude": ["node_modules", "dist", "server", "public"]
+    "include": ["src"]
 }

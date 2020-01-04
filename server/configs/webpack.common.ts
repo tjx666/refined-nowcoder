@@ -5,12 +5,13 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
+import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
 
 import entry from '../utils/entry';
 
 const projectRoot = resolve(__dirname, '../../');
 
-const CSSLoaders = (importLoaders: number) => {
+const getCSSLoaders = (importLoaders: number) => {
     return [
         MiniCssExtractPlugin.loader,
         { loader: 'css-loader', options: { importLoaders } },
@@ -34,7 +35,7 @@ const commonConfig: Configuration = {
         hotUpdateMainFilename: 'hot/[hash].hot-update.json',
     },
     watchOptions: {
-        ignored: [/node_modules/, /dist/, /docs/, /server/],
+        ignored: [/node_modules/, /dist/, /docs/, /public/, /server/],
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json'],
@@ -46,6 +47,7 @@ const commonConfig: Configuration = {
         },
     },
     plugins: [
+        new AntdDayjsWebpackPlugin(),
         new HashedModuleIdsPlugin({
             hashFunction: 'sha256',
             hashDigest: 'hex',
@@ -72,38 +74,30 @@ const commonConfig: Configuration = {
         rules: [
             {
                 test: /\.(ts|js)x?$/,
-                use: [
-                    'thread-loader',
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            cacheDirectory: true,
-                        },
-                    },
-                ],
+                loader: 'babel-loader',
+                options: { cacheDirectory: true },
                 exclude: /node_modules/,
             },
             {
                 test: /\.css$/,
-                use: CSSLoaders(1),
+                use: getCSSLoaders(1),
             },
             {
                 test: /\.less$/,
                 use: [
-                    ...CSSLoaders(2),
+                    ...getCSSLoaders(2),
                     {
                         loader: 'less-loader',
                         options: {
-                            // use modifyVars to custom antd theme
-                            modifyVars: {},
                             javascriptEnabled: true,
+                            modifyVars: {},
                         },
                     },
                 ],
             },
             {
-                test: /\.s[ac]ss$/,
-                use: [...CSSLoaders(2), 'sass-loader'],
+                test: /\.scss$/,
+                use: [...getCSSLoaders(2), 'sass-loader'],
             },
             {
                 test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],

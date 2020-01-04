@@ -1,5 +1,3 @@
-/* eslint-disable global-require, @typescript-eslint/no-var-requires, prefer-destructuring */
-
 import { resolve } from 'path';
 import { argv } from 'yargs';
 import { Plugin } from 'webpack';
@@ -7,7 +5,7 @@ import merge from 'webpack-merge';
 import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
 import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
-import { BundleAnalyzerPlugin as TempBundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import TerserPlugin from 'terser-webpack-plugin';
 import SizePlugin from 'size-plugin';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
@@ -36,11 +34,7 @@ const plugins: Plugin[] = [
     }),
 ];
 
-if (argv.analyze) {
-    const BundleAnalyzerPlugin: typeof TempBundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-        .BundleAnalyzerPlugin;
-    plugins.push(new BundleAnalyzerPlugin({ openAnalyzer: true }));
-}
+argv.analyze && plugins.push(new BundleAnalyzerPlugin({ openAnalyzer: true }));
 
 const mergedConfig = merge(commonConfig, {
     mode: 'production',
@@ -62,7 +56,6 @@ const mergedConfig = merge(commonConfig, {
         ],
     },
 });
-
 const smp = new SpeedMeasurePlugin();
 const prodConfig = smp.wrap(mergedConfig);
 

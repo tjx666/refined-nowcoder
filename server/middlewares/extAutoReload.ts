@@ -1,22 +1,21 @@
 import fs from 'fs';
-import Path from 'path';
+import { resolve } from 'path';
 import chalk from 'chalk';
 import { debounce } from 'lodash';
 import { RequestHandler } from 'express';
 import { Compiler, Stats } from 'webpack';
 import SSEStream from 'ssestream';
 
-export default (compiler: Compiler) => {
-    const extensionAutoReloadMiddleware: RequestHandler = (req, res, next) => {
+export default function(compiler: Compiler) {
+    const extAutoReload: RequestHandler = (req, res, next) => {
         console.log(chalk.yellow('Received a SSE client connection!'));
+
         res.header('Access-Control-Allow-Origin', '*');
         const sseStream = new SSEStream(req);
         sseStream.pipe(res);
         let closed = false;
 
-        // 防抖处理
-        const contentScriptsModules = fs.readdirSync(Path.resolve(__dirname, '../../src/contents'));
-
+        const contentScriptsModules = fs.readdirSync(resolve(__dirname, '../../src/contents'));
         const compileDoneHook = debounce((stats: Stats) => {
             const { modules } = stats.toJson({ all: false, modules: true });
             const shouldReload =
@@ -27,6 +26,7 @@ export default (compiler: Compiler) => {
 
             if (shouldReload) {
                 console.log(chalk.yellow('Send extension reload signal!'));
+
                 sseStream.write(
                     {
                         event: 'compiled-successfully',
@@ -57,5 +57,5 @@ export default (compiler: Compiler) => {
         next();
     };
 
-    return extensionAutoReloadMiddleware;
-};
+    return extAutoReload;
+}
