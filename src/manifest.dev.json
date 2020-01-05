@@ -3,7 +3,7 @@
     "version": "1.0.1",
     "description": "牛客网 chrome 扩展",
     "manifest_version": 2,
-    "permissions": ["storage", "notifications", "https://www.nowcoder.com/*"],
+    "permissions": ["storage", "notifications", "https://www.nowcoder.com/*", "https://github.com/*"],
     "content_security_policy": "script-src 'self' 'unsafe-eval' http://localhost:3000; object-src 'self';",
     "minimum_chrome_version": "68",
     "background": {
@@ -12,7 +12,7 @@
     },
     "content_scripts": [
         {
-            "matches": ["https://www.nowcoder.com/*"],
+            "matches": ["https://www.nowcoder.com/*", "https://github.com/*"],
             "css": ["css/all.css"],
             "js": ["vendor/js/jquery.js", "js/all.js"]
         },

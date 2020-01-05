@@ -49,7 +49,8 @@ scriptNames.forEach(name => {
 });
 
 if (!isProd) {
-    entry.all.unshift(resolve(__dirname, './extensionAutoReloadClient.ts'));
+    entry.all.unshift(resolve(__dirname, './autoRefreshPatch.ts'));
+    entry.background.unshift(resolve(__dirname, './autoReloadPatch.ts'));
 }
 
 export default entry;
