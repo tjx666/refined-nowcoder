@@ -1,5 +1,5 @@
 import { onlineStorage } from 'utils/storage';
-import doubleClickBackToTopFeature from './doubleClickBackToTop';
+import doubleClickBackToTopFeature from './dbClickBackToTop';
 import './style.scss';
 
 // 存储 cookie

@@ -3,12 +3,16 @@ import isOnline from 'is-online';
 import { onlineStorage } from 'utils/storage';
 import notifications from '@/utils/notifications';
 
-// 自动打卡
-// !: 打卡出错只弹一次通知
-export default function() {
+/**
+ * 设置自动打卡
+ *
+ * !: 如果打卡失败了，下次打卡失败将不再提醒，直到打卡成功
+ */
+export default function autoClock() {
     let autoClockTimer: number | undefined;
 
-    const clock = async () => {
+    async function clock() {
+        // eslint-disable-next-line no-shadow
         const { autoClock, feeling, lastClockDate, autoClockFailed, cookie } = await onlineStorage.get({
             autoClock: false,
             feeling: '',
@@ -17,7 +21,7 @@ export default function() {
             cookie: '',
         });
 
-        const todayDateString = new Date().toDateString();
+        const todayDateStr = new Date().toDateString();
         // 关闭打卡功能后关闭定时器
         if (!autoClock && autoClockTimer !== undefined) {
             clearInterval(autoClockTimer);
@@ -25,8 +29,9 @@ export default function() {
             return;
         }
 
-        // 没有可用网络不打卡
-        if (autoClock && lastClockDate !== todayDateString && (await isOnline())) {
+        // 没有开启自动打卡，今天已经打过卡，没有网络的情况下都不打卡
+        const shouldClock = autoClock && lastClockDate !== todayDateStr && (await isOnline());
+        if (shouldClock) {
             const clockURL = 'https://www.nowcoder.com/clock/new';
             let res: any;
             try {
@@ -40,36 +45,35 @@ export default function() {
                     }
                 );
             } catch (err) {
-                !autoClockFailed && notifications('牛客自动打卡失败！', `原因：牛客服务器异常`);
+                !autoClockFailed && notifications('自动打卡失败！', `原因：服务器异常`);
                 onlineStorage.set({ autoClockFailed: true });
                 return;
             }
 
             const { code } = res.data;
             if (code === 0) {
-                // eslint-disable-next-line prefer-template
-                notifications('牛客网自动打卡成功！', `打卡内容：${feeling ? feeling + '!' : ''}`);
+                notifications('自动打卡成功！', `打卡内容：${feeling || '未设置'}`);
             } else if (code === 999) {
                 // 999: 未登入
-                !autoClockFailed && notifications('牛客网自动打卡失败！', `原因：您尚未登入牛客！`);
+                !autoClockFailed && notifications('自动打卡失败！', `原因：您尚未登入牛客网！`);
                 onlineStorage.set({ autoClockFailed: true });
                 return;
             } else if (code === 1) {
                 // 1: 已经打卡过
             }
-            onlineStorage.set({ lastClockDate: todayDateString, autoClockFailed: false });
+            onlineStorage.set({ lastClockDate: todayDateStr, autoClockFailed: false });
         }
-    };
+    }
 
     // 启动浏览器的时候打一次卡
     clock();
-    // 隔5分钟打一次
-    autoClockTimer = window.setInterval(clock, 5 * 60 * 1000);
+    // 隔 30 分钟打一次
+    autoClockTimer = window.setInterval(clock, 30 * 60 * 1000);
 
-    // 处理开启或关闭自动打卡功能
-    chrome.runtime.onMessage.addListener(request => {
-        if (request && request.from === 'options') {
-            if (request.action === 'enable-auto-clock') {
+    // 处理在选项页面开启或关闭自动打卡功能
+    chrome.runtime.onMessage.addListener(({ from, action }) => {
+        if (from === 'options') {
+            if (action === 'enable-auto-clock') {
                 // 开启自动打卡的时候打一次卡
                 clock();
 
@@ -78,9 +82,9 @@ export default function() {
                     clearInterval(autoClockTimer);
                 }
 
-                // 隔5分钟打一次
-                autoClockTimer = window.setInterval(clock, 5 * 60 * 1000);
-            } else if (request.action === 'disable-auto-clock') {
+                // 隔 30 分钟打一次
+                autoClockTimer = window.setInterval(clock, 30 * 60 * 1000);
+            } else if (action === 'disable-auto-clock') {
                 clearInterval(autoClockTimer);
                 autoClockTimer = undefined;
             }

@@ -2,7 +2,6 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import _ from 'lodash';
 import { onlineStorage } from 'utils/storage';
 import { isValidRegexp } from 'utils/regexp';
 import { BlockInfos } from './components';
@@ -16,11 +15,11 @@ export default async function blockPosts() {
     });
     if (!blockWish && !blockMakeFriends && blockPostRegexps.trim() === '') return;
 
-    const $postsLis = $('.nk-content .common-list li');
     let blockWishCount = 0;
     let blockMakeFriendsCount = 0;
     let blockByCustomRulesCount = 0;
     const blockedPostsLis: HTMLElement[] = [];
+    const $postsLis = $('.nk-content .common-list li');
     $postsLis.each(function() {
         const $links = $(this).find('.discuss-main a');
         if ($links.length >= 1) {
