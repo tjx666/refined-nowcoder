@@ -3,7 +3,7 @@
     "version": "1.0.1",
     "description": "牛客网 chrome 扩展",
     "manifest_version": 2,
-    "permissions": ["storage", "notifications", "https://www.nowcoder.com/*"],
+    "permissions": ["storage", "notifications"],
     "minimum_chrome_version": "68",
     "background": {
         "scripts": ["js/background.js"],

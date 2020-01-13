@@ -1,11 +1,12 @@
 import * as React from 'react';
+
 import { onlineStorage } from 'utils/storage';
 import { SettingCard } from '../../components';
 
 const { SettingRow } = SettingCard;
 
-const Home = () => {
-    const [settings, updateSettings] = React.useState({
+function Home() {
+    const [settings, setSettings] = React.useState({
         blockWish: false,
         blockMakeFriends: false,
         doubleClickBackToTop: false,
@@ -18,7 +19,7 @@ const Home = () => {
             doubleClickBackToTop: false,
         });
 
-        updateSettings(onlineSetting);
+        setSettings(onlineSetting);
     }, []);
 
     React.useEffect(() => {
@@ -26,10 +27,10 @@ const Home = () => {
     }, [syncOnlineSettings]);
 
     const getSettingsChangeHandler = (key: keyof typeof settings) => {
-        return (checked: boolean) => {
+        return async (checked: boolean) => {
             const newSettings = { ...settings, [key]: checked };
-            onlineStorage.set({ ...newSettings });
-            updateSettings(newSettings);
+            await onlineStorage.set(newSettings);
+            setSettings(newSettings);
         };
     };
 
@@ -55,6 +56,6 @@ const Home = () => {
             </SettingCard>
         </div>
     );
-};
+}
 
 export default Home;

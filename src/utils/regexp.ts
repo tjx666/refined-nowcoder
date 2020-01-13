@@ -1,11 +1,10 @@
-/* eslint-disable import/prefer-default-export */
-export const isValidRegexp = (strToBeValidated: string): boolean => {
+/* eslint-disable import/prefer-default-export, no-new */
+export function isValidRegexp(regexpString: string): boolean {
     try {
-        // eslint-disable-next-line no-new
-        new RegExp(strToBeValidated);
+        new RegExp(regexpString);
     } catch (err) {
         return false;
     }
 
     return true;
-};
+}

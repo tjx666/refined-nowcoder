@@ -1,7 +1,7 @@
 import axios from 'axios';
 import isOnline from 'is-online';
 import { onlineStorage } from 'utils/storage';
-import notifications from '@/utils/notifications';
+import notification from '@/utils/notification';
 
 /**
  * 设置自动打卡
@@ -45,17 +45,17 @@ export default function autoClock() {
                     }
                 );
             } catch (err) {
-                !autoClockFailed && notifications('自动打卡失败！', `原因：服务器异常`);
+                !autoClockFailed && notification('自动打卡失败！', `原因：服务器异常`);
                 onlineStorage.set({ autoClockFailed: true });
                 return;
             }
 
             const { code } = res.data;
             if (code === 0) {
-                notifications('自动打卡成功！', `打卡内容：${feeling || '未设置'}`);
+                notification('自动打卡成功！', `打卡内容：${feeling || '未设置'}`);
             } else if (code === 999) {
                 // 999: 未登入
-                !autoClockFailed && notifications('自动打卡失败！', `原因：您尚未登入牛客网！`);
+                !autoClockFailed && notification('自动打卡失败！', `原因：您尚未登入牛客网！`);
                 onlineStorage.set({ autoClockFailed: true });
                 return;
             } else if (code === 1) {

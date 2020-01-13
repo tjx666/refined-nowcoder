@@ -22,7 +22,7 @@
     "settings": {
         "import/resolver": {
             "node": {
-                "extensions": [".js", ".jsx", ".json", ".ts", ".tsx"]
+                "extensions": [".ts", ".tsx", ".js", ".json"]
             },
             "typescript": {}
         }

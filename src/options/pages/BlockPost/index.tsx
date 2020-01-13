@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Input, Form, Icon, Tooltip } from 'antd';
 import { onlineStorage } from 'utils/storage';
 import { isValidRegexp } from 'utils/regexp';
+
 import { PageLayout } from '../../components';
 import SettingRow from '../../components/SettingCard/SettingRow';
 import './style.scss';
