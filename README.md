@@ -14,15 +14,6 @@
 
 - :arrow_up: 双击返回顶部
 
-## :dart: ​TODOS
-
-- [ ] 修复自动打卡 bug
-- [ ] 讨论区记住上次退出时的筛选条件
-- [ ] 心动企业，帖子列表如果和设置的心动企业相关，会有突出效果
-- [ ] 心动企业发布新招聘弹窗提示
-- [ ] 新消息通知（实验性）
-- [ ] 只看自己回帖（实验性）
-
 ## :package: 安装
 
 扩展已发布到 chrome 应用商店，欢迎体验使用 [refined nowcoder](https://chrome.google.com/webstore/detail/refined-nowcoder/jkkhnkldfjgmekpgkgdefeenfpmmnnem)。

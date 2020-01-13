@@ -61,6 +61,7 @@ export default function autoClock() {
             } else if (code === 1) {
                 // 1: 已经打卡过
             }
+
             onlineStorage.set({ lastClockDate: todayDateStr, autoClockFailed: false });
         }
     }
