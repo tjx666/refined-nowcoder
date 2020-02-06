@@ -5,7 +5,7 @@
         "node": true,
         "webextensions": true
     },
-    "extends": ["airbnb", "airbnb/hooks", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+    "extends": ["airbnb", "airbnb/hooks", "plugin:@typescript-eslint/recommended", "prettier"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -15,7 +15,7 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 2018,
+        "ecmaVersion": 2020,
         "sourceType": "module"
     },
     "plugins": ["@typescript-eslint", "react"],
@@ -29,30 +29,39 @@
     },
     "rules": {
         "react/jsx-indent": ["error", 4],
-        "react/jsx-indent-props": [2, 4],
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-filename-extension": ["error", { "extensions": [".ts", ".tsx", ".js"] }],
         "react/jsx-one-expression-per-line": "off",
 
         "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
         "import/extensions": "off",
 
+        "func-names": "off",
+        "global-require": "off",
+        "lines-between-class-members": "off",
         "no-console": "off",
         "no-plusplus": "off",
         "no-unused-expressions": "off",
-        "func-names": "off",
-        "global-require": "off",
+        "no-useless-constructor": "off",
 
-        "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-useless-constructor": "error",
         "@typescript-eslint/no-var-requires": "off"
     },
     "overrides": [
         {
+            "files": ["**/*.d.ts"],
+            "rules": {
+                "import/no-duplicates": "off",
+                "max-classes-per-file": "off"
+            }
+        },
+        {
             "files": ["server/**/*.ts"],
             "rules": {
                 "global-require": "off",
-                "no-unused-expressions": "off",
 
                 "import/no-extraneous-dependencies": "off",
                 "import/no-dynamic-require": "off",

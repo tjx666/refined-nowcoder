@@ -5,8 +5,8 @@ import CopyPlugin from 'copy-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 import commonConfig from './webpack.common';
+import { projectRoot } from '../utils/env';
 
-const projectRoot = resolve(__dirname, '../../');
 const devConfig = merge(commonConfig, {
     mode: 'development',
     devtool: 'eval-source-map',

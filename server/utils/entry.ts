@@ -10,22 +10,24 @@ const src = resolve(__dirname, '../../src');
 const HMRSSEPath = encodeURIComponent(`http://${serverConfig.HOST}:${serverConfig.PORT}/__webpack_HMR__`);
 const HMRClientScript = `webpack-hot-middleware/client?path=${HMRSSEPath}&reload=true`;
 
+const backgroundPath = resolve(src, './background/index.ts');
+const optionsPath = resolve(src, './options/index.tsx');
+
 const devEntry: Record<string, string[]> = {
-    background: [HMRClientScript, resolve(src, './background/index.ts')],
-    options: [HMRClientScript, 'react-hot-loader/patch', resolve(src, './options/index.tsx')],
+    background: [HMRClientScript, backgroundPath],
+    options: [HMRClientScript, 'react-hot-loader/patch', optionsPath],
 };
-
 const prodEntry: Record<string, string[]> = {
-    background: [resolve(src, './background/index.ts')],
-    options: [resolve(src, './options/index.tsx')],
+    background: [backgroundPath],
+    options: [optionsPath],
 };
-
 const entry = isProd ? prodEntry : devEntry;
 
 if (argv.devtools) {
     entry.options.unshift('react-devtools');
     command('npx react-devtools').catch(err => {
-        console.error('Startup react-devtools occur error:', err);
+        console.error('Startup react-devtools occur error');
+        console.error(err);
     });
 }
 
@@ -48,7 +50,7 @@ scriptNames.forEach(name => {
     }
 });
 
-if (!isProd) {
+if (entry.all && !isProd) {
     entry.all.unshift(resolve(__dirname, './autoRefreshPatch.ts'));
     entry.background.unshift(resolve(__dirname, './autoReloadPatch.ts'));
 }

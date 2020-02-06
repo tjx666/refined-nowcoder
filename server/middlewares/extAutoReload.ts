@@ -1,15 +1,12 @@
 import fs from 'fs';
 import { resolve } from 'path';
-import chalk from 'chalk';
 import { debounce } from 'lodash';
 import { RequestHandler } from 'express';
 import { Compiler, Stats } from 'webpack';
 import SSEStream from 'ssestream';
 
-export default function(compiler: Compiler) {
-    const extAutoReload: RequestHandler = (req, res, next) => {
-        console.log(chalk.yellow('Received a SSE client connection!'));
-
+export default function(compiler: Compiler): RequestHandler {
+    return (req, res, next) => {
         res.header('Access-Control-Allow-Origin', '*');
         const sseStream = new SSEStream(req);
         sseStream.pipe(res);
@@ -25,13 +22,11 @@ export default function(compiler: Compiler) {
                 contentScriptsModules.includes(modules[0].chunks[0] as string);
 
             if (shouldReload) {
-                console.log(chalk.yellow('Send extension reload signal!'));
-
                 sseStream.write(
                     {
-                        event: 'compiled-successfully',
+                        event: 'compiledSuccessfully',
                         data: {
-                            action: 'reload-extension-and-refresh-current-page',
+                            action: 'reload extension and refresh current page',
                         },
                     },
                     'UTF-8',
@@ -39,7 +34,7 @@ export default function(compiler: Compiler) {
                         if (error) {
                             console.error(error);
                         }
-                    }
+                    },
                 );
             }
         }, 1000);
@@ -50,12 +45,9 @@ export default function(compiler: Compiler) {
 
         res.on('close', () => {
             closed = true;
-            console.log(chalk.yellow('SSE connection closed!'));
             sseStream.unpipe(res);
         });
 
         next();
     };
-
-    return extAutoReload;
 }

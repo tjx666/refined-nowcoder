@@ -17,23 +17,9 @@ declare module 'speed-measure-webpack-plugin' {
     export = SpeedMeasurePlugin;
 }
 
-declare module 'progress-bar-webpack-plugin' {
-    import { Plugin } from 'webpack';
-
-    interface ProgressBarPluginOptions {
-        format: string;
-        clear: boolean;
-    }
-
-    class ProgressBarPlugin extends Plugin {
-        constructor(options?: Partial<ProgressBarPluginOptions>);
-    }
-
-    export = ProgressBarPlugin;
-}
-
 declare module 'size-plugin' {
     import { Plugin } from 'webpack';
+
     interface SizePluginOptions {
         writeFile?: boolean;
     }
@@ -45,6 +31,14 @@ declare module 'size-plugin' {
     export = SizePlugin;
 }
 
+declare module 'antd-dayjs-webpack-plugin' {
+    import { Plugin } from 'webpack';
+
+    class WebpackDayjsPlugin extends Plugin {}
+
+    export = WebpackDayjsPlugin;
+}
+
 declare module 'ssestream' {
     import { Request } from 'express';
     import { Transform } from 'stream';
@@ -54,12 +48,4 @@ declare module 'ssestream' {
     }
 
     export = SSEStream;
-}
-
-declare module 'antd-dayjs-webpack-plugin' {
-    import { Plugin } from 'webpack';
-
-    class WebpackDayjsPlugin extends Plugin {}
-
-    export = WebpackDayjsPlugin;
 }

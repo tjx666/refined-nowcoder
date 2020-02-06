@@ -2,21 +2,19 @@ import { resolve } from 'path';
 import { argv } from 'yargs';
 import { Plugin } from 'webpack';
 import merge from 'webpack-merge';
-import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
-import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import TerserPlugin from 'terser-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import SizePlugin from 'size-plugin';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
+import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 import commonConfig from './webpack.common';
-
-const projectRoot = resolve(__dirname, '../../');
+import { projectRoot } from '../utils/env';
 
 const plugins: Plugin[] = [
-    new ProgressBarPlugin(),
     new CopyPlugin([
         {
             from: resolve(projectRoot, 'public'),
@@ -34,7 +32,9 @@ const plugins: Plugin[] = [
     }),
 ];
 
-argv.analyze && plugins.push(new BundleAnalyzerPlugin({ openAnalyzer: true }));
+if (argv.analyze) {
+    plugins.push(new BundleAnalyzerPlugin());
+}
 
 const mergedConfig = merge(commonConfig, {
     mode: 'production',
@@ -45,14 +45,9 @@ const mergedConfig = merge(commonConfig, {
             new TerserPlugin({
                 cache: true,
                 parallel: true,
-                sourceMap: true,
                 extractComments: false,
-                terserOptions: {
-                    output: {
-                        comments: false,
-                    },
-                },
             }),
+            new OptimizeCSSAssetsPlugin(),
         ],
     },
 });
